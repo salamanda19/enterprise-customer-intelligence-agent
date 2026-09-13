@@ -1,243 +1,243 @@
-# Project Proposal: Enterprise Customer Intelligence Agent
+# 專案提案：企業客戶智慧代理（Enterprise Customer Intelligence Agent）
 
-## 1. Project Overview
+## 1. 專案概述
 
-### Working title
+### 暫定名稱
 
-**Enterprise Customer Intelligence Agent**
+**Enterprise Customer Intelligence Agent**（企業客戶智慧代理）
 
-### Subtitle
+### 副標題
 
-> A grounded AI analytics system for natural-language exploration of customer and marketing data.
+> 一套有依據（grounded）的 AI 分析系統，以自然語言探索客戶與行銷資料。
 
-### Purpose
+### 目的
 
-Build a portfolio project that demonstrates the ability to design a reliable, enterprise-oriented AI analytics system—not merely a RAG chatbot or an LLM API demo.
+打造一個作品集專案，證明有能力設計可靠、面向企業的 AI 分析系統——而不只是 RAG 聊天機器人或 LLM API 示範。
 
-The project should show how modern AI can be integrated with structured data, business definitions, deterministic analytics tools, and unstructured documents while maintaining reliability, traceability, security, and reasonable cost.
+本專案應展示如何把現代 AI 與結構化資料、業務定義、確定性（deterministic）分析工具，以及非結構化文件整合在一起，同時維持可靠性、可追溯性、安全性與合理成本。
 
-The intended audience is hiring managers and technical interviewers for roles such as:
+預期讀者為招聘主管與技術面試官，對應職缺例如：
 
-- Senior / Lead Data Scientist
-- Applied Data Scientist
-- AI / Data Consultant
-- AI Solutions / AI Transformation
-- Data & AI Product roles
-- Analytics / Decision Science leadership roles
-
----
-
-## 2. Why This Project
-
-My existing CV already demonstrates substantial experience in:
-
-- customer analytics
-- predictive modelling
-- marketing analytics
-- machine learning
-- Google Cloud / TensorFlow
-- automated data pipelines
-- stakeholder-facing analytics
-- real-time behavioural prediction
-
-Therefore, this project should **not** simply demonstrate another conventional ML prediction model.
-
-The primary capability gaps this project is intended to address are:
-
-1. Modern GenAI / LLM application development
-2. Tool-using AI agents
-3. RAG and grounded generation
-4. Natural-language-to-SQL analytics
-5. AI evaluation
-6. Reliability and validation
-7. Enterprise AI system design
-8. Security and responsible data access
-9. Cost and latency considerations
-
-The project should strengthen the career narrative:
-
-> **Experienced enterprise data professional → modern AI / GenAI practitioner capable of designing reliable AI-enabled analytics systems.**
+- 資深／主導資料科學家（Senior / Lead Data Scientist）
+- 應用資料科學家（Applied Data Scientist）
+- AI／資料顧問
+- AI 解決方案／AI 轉型
+- 資料與 AI 產品職缺
+- 分析／決策科學領導職缺
 
 ---
 
-# 3. Business Scenario
+## 2. 為何做這個專案
 
-Simulate a large hospitality / retail enterprise with customer and marketing data.
+現有履歷已能證明在下列領域有充分經驗：
 
-The organization has both structured and unstructured information.
+- 客戶分析
+- 預測建模
+- 行銷分析
+- 機器學習
+- Google Cloud／TensorFlow
+- 自動化資料管線
+- 面向利害關係人的分析
+- 即時行為預測
 
-## Structured data
+因此，本專案**不應**只是再做一個傳統的機器學習預測模型。
 
-Example entities:
+本專案主要要補上的能力缺口是：
 
-- Customers
-- Bookings
-- Transactions
-- Campaigns
-- Campaign contacts
-- Customer segments
-- Products / properties
+1. 現代 GenAI／LLM 應用開發
+2. 會使用工具的 AI 代理（tool-using agents）
+3. RAG 與有依據的生成（grounded generation）
+4. 自然語言轉 SQL 分析
+5. AI 評估（evaluation）
+6. 可靠性與驗證
+7. 企業級 AI 系統設計
+8. 安全與負責任的資料存取
+9. 成本與延遲考量
 
-## Unstructured data
+本專案應強化職涯敘事：
 
-Example documents:
-
-- Campaign briefs
-- Customer research reports
-- Business reports
-- Product descriptions
-- Management documents
-- Business definitions
-
-Business users should be able to ask questions in natural language without writing SQL.
-
-Examples:
-
-> "What was hotel booking revenue in 2025?"
-
-> "Which customer segment had the largest year-over-year decline?"
-
-> "What contributed most to the Q2 revenue decline?"
-
-> "What is the company's definition of a VIP customer?"
-
-> "Did Campaign A cause revenue to increase?"
-
-The system should determine the appropriate analytical workflow rather than blindly asking an LLM to generate an answer.
+> **有經驗的企業資料專業人士 → 能設計可靠、具備 AI 能力之分析系統的現代 AI／GenAI 實務者。**
 
 ---
 
-# 4. Core Design Principle
+# 3. 業務情境
 
-The fundamental architecture is:
+模擬一家大型餐旅／零售企業，具備客戶與行銷資料。
+
+組織同時擁有結構化與非結構化資訊。
+
+## 結構化資料
+
+實體範例：
+
+- 客戶（Customers）
+- 預訂（Bookings）
+- 交易（Transactions）
+- 行銷活動（Campaigns）
+- 活動接觸紀錄（Campaign contacts）
+- 客戶分群（Customer segments）
+- 產品／物業（Products / properties）
+
+## 非結構化資料
+
+文件範例：
+
+- 活動企劃書（Campaign briefs）
+- 客戶研究報告
+- 業務報告
+- 產品說明
+- 管理文件
+- 業務定義
+
+業務使用者應能以自然語言提問，不必撰寫 SQL。
+
+範例：
+
+> 「2025 年飯店預訂營收是多少？」
+
+> 「哪個客戶分群的年增率下滑最大？」
+
+> 「第二季營收下滑最主要的貢獻因素是什麼？」
+
+> 「公司對 VIP 客戶的定義是什麼？」
+
+> 「活動 A 是否造成營收增加？」
+
+系統應判斷適當的分析工作流程，而不是盲目把問題丟給 LLM 產生答案。
+
+---
+
+# 4. 核心設計原則
+
+基本架構為：
 
 ```text
-                         ┌── SQL / Database
+                         ┌── SQL／資料庫
                          │
-User question → Agent ───┼── Python Analytics
+使用者問題 → 代理 ───────┼── Python 分析
                          │
-                         ├── Document Retrieval
+                         ├── 文件檢索
                          │
-                         └── Business Metadata
+                         └── 業務中繼資料
                                   ↓
-                           Validation Layer
+                           驗證層
                                   ↓
-                         Answer + Evidence
+                         答案＋證據
 ```
 
-The LLM should primarily perform **orchestration and reasoning**.
+LLM 應主要負責**編排與推理**。
 
-It should not be treated as the source of truth for numerical results or business definitions.
+不應把 LLM 當成數值結果或業務定義的事實來源（source of truth）。
 
-A core design principle is:
+一項核心設計原則是：
 
-> **Use deterministic tools whenever deterministic computation is sufficient; use LLM reasoning only where it adds value.**
+> **只要確定性計算就足夠，就使用確定性工具；僅在能真正增加價值之處使用 LLM 推理。**
 
-Another core principle:
+另一項核心原則：
 
-> **LLM-generated results should be validated by deterministic mechanisms wherever possible.**
+> **LLM 產生的結果，只要可行，都應由確定性機制加以驗證。**
 
 ---
 
-# 5. Types of Questions
+# 5. 問題類型
 
-The system should intentionally support several classes of questions.
+系統應有意支援數類問題。
 
-## Type A — Deterministic questions
+## 類型 A — 確定性問題
 
-Example:
+範例：
 
-> "What was revenue in 2025?"
+> 「2025 年營收是多少？」
 
-Expected workflow:
+預期流程：
 
 ```text
-Question
+問題
    ↓
 SQL
    ↓
-Database
+資料庫
    ↓
-Result
+結果
 ```
 
-No unnecessary LLM reasoning should be introduced.
+不應引入不必要的 LLM 推理。
 
 ---
 
-## Type B — Analytical questions
+## 類型 B — 分析性問題
 
-Example:
+範例：
 
-> "Why did booking revenue decline in Q2?"
+> 「為什麼第二季預訂營收下滑？」
 
-Expected workflow may include:
+預期流程可能包含：
 
 ```text
 SQL
  ↓
-Segment analysis
+分群分析
  ↓
-Time-series comparison
+時間序列比較
  ↓
-Contribution analysis
+貢獻度分析
  ↓
-Optional statistical analysis
+可選的統計分析
  ↓
-LLM-generated explanation
+LLM 產生的解釋
 ```
 
-The final explanation must be grounded in the computed results.
+最終解釋必須奠基於已計算出的結果。
 
 ---
 
-## Type C — Knowledge questions
+## 類型 C — 知識問題
 
-Example:
+範例：
 
-> "What is the definition of a VIP customer?"
+> 「VIP 客戶的定義是什麼？」
 
-Expected workflow:
+預期流程：
 
 ```text
-Question
+問題
  ↓
-Retrieval
+檢索
  ↓
-Business definition
+業務定義
  ↓
-Answer + citation
+答案＋引用
 ```
 
-The system should provide evidence for the definition.
+系統應為該定義提供證據。
 
 ---
 
-## Type D — Questions the system should not confidently answer
+## 類型 D — 系統不應自信作答的問題
 
-Example:
+範例：
 
-> "Did Campaign A cause revenue to increase?"
+> 「活動 A 是否造成營收增加？」
 
-If the available data is observational and there is no appropriate randomized treatment/control design, the system should not claim causality.
+若現有資料屬觀察性資料，且沒有適當的隨機處理／對照設計，系統不應主張因果關係。
 
-Expected behaviour:
+預期行為：
 
-> The system should distinguish association from causal effect and explain what additional data or experimental design would be required to support a causal conclusion.
+> 系統應區分關聯與因果效應，並說明還需要哪些額外資料或實驗設計，才能支持因果結論。
 
-This is an important demonstration of analytical judgment.
+這是分析判斷力的重要展示。
 
 ---
 
-# 6. Synthetic Data Strategy
+# 6. 合成資料策略
 
-No confidential company data will be used.
+不會使用任何機密公司資料。
 
-The project should use public and/or synthetic data.
+專案應使用公開及／或合成資料。
 
-The preferred approach is to create a coherent synthetic enterprise dataset rather than a collection of unrelated CSV files.
+較佳做法是建立一套前後一致的合成企業資料集，而不是一堆互不相關的 CSV 檔。
 
-Possible schema:
+可能的 schema：
 
 ```text
 customers
@@ -283,104 +283,104 @@ contacted
 ...
 ```
 
-The exact schema will be finalized during project specification.
+確切 schema 將在專案規格階段定稿。
 
 ---
 
-# 7. Business Semantic Layer
+# 7. 業務語意層
 
-A key component of the project should be a business semantic / metadata layer.
+專案的關鍵元件之一應是業務語意／中繼資料層。
 
-The LLM should not be expected to infer business definitions.
+不應期待 LLM 自行推斷業務定義。
 
-For example:
+例如：
 
-### active_customer
+### active_customer（活躍客戶）
 
-A customer with at least one qualifying transaction during the preceding 90 days.
+在過去 90 天內至少有一筆合格交易的客戶。
 
-### high_value_customer
+### high_value_customer（高價值客戶）
 
-A customer whose trailing-12-month contribution exceeds a defined threshold.
+過去 12 個月貢獻超過既定門檻的客戶。
 
-### booking_revenue
+### booking_revenue（預訂營收）
 
-Gross booking revenue excluding cancellations.
+不含取消的總預訂營收。
 
-Definitions should be explicit and accessible to the agent.
+定義應明確，且代理可以存取。
 
-This component is important because enterprise analytics often depends as much on consistent business definitions as on SQL generation.
+此元件之所以重要，是因為企業分析往往同樣仰賴一致的業務定義，而不只是 SQL 產生。
 
 ---
 
-# 8. Proposed Architecture
+# 8. 建議架構
 
-Initial architecture:
+初始架構：
 
 ```text
                          ┌──────────────────────┐
-                         │        User          │
+                         │        使用者         │
                          └──────────┬───────────┘
                                     ↓
                          ┌──────────────────────┐
-                         │    LLM / Agent       │
-                         │    Orchestration     │
+                         │    LLM／代理         │
+                         │    編排（Orchestration）│
                          └──────────┬───────────┘
                                     │
               ┌─────────────────────┼─────────────────────┐
               ↓                     ↓                     ↓
        ┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-       │  SQL Tool   │       │ Python Tool │       │  RAG Tool   │
+       │  SQL 工具   │       │ Python 工具 │       │  RAG 工具   │
        └──────┬──────┘       └──────┬──────┘       └──────┬──────┘
               ↓                     ↓                     ↓
        ┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-       │  Database   │       │  Analytics  │       │  Documents  │
+       │  資料庫     │       │  分析       │       │  文件       │
        └─────────────┘       └─────────────┘       └─────────────┘
               │                     │                     │
               └─────────────────────┼─────────────────────┘
                                     ↓
                          ┌──────────────────────┐
-                         │ Validation / Guardrail│
+                         │ 驗證／護欄（Guardrail）│
                          └──────────┬───────────┘
                                     ↓
                          ┌──────────────────────┐
-                         │ Answer + Evidence   │
+                         │ 答案＋證據           │
                          └──────────────────────┘
 ```
 
-The first version should use a **single well-designed agent**.
+第一版應使用**單一、設計良好的代理**。
 
-Multi-agent architecture should not be introduced unless experimentation demonstrates a clear benefit.
-
----
-
-# 9. Validation and Reliability
-
-Validation is one of the central features of the project.
-
-## SQL validation
-
-Before execution, validate:
-
-- SQL syntax
-- table existence
-- column existence
-- permitted operations
-- permission scope
-- query size / resource limits
-- dangerous SQL operations
-
-The system should initially restrict database access to read-only operations.
+除非實驗證明有明確效益，否則不應引入多代理架構。
 
 ---
 
-## Numerical validation
+# 9. 驗證與可靠性
 
-If the LLM produces:
+驗證是本專案的核心特色之一。
 
-> "Revenue increased by 23%."
+## SQL 驗證
 
-The system should be capable of independently verifying:
+執行前應驗證：
+
+- SQL 語法
+- 資料表是否存在
+- 欄位是否存在
+- 允許的操作
+- 權限範圍
+- 查詢規模／資源上限
+- 危險的 SQL 操作
+
+系統初期應將資料庫存取限制為唯讀操作。
+
+---
+
+## 數值驗證
+
+若 LLM 產出：
+
+> 「營收增加了 23%。」
+
+系統應能獨立核對：
 
 ```text
 current revenue = 12.3M
@@ -390,37 +390,37 @@ growth = (12.3 - 10.0) / 10.0
        = 23%
 ```
 
-The LLM should not be trusted to perform arithmetic when deterministic computation is available.
+當確定性計算可用時，不應信任 LLM 做算術。
 
 ---
 
-## Evidence validation
+## 證據驗證
 
-Claims in the final answer should be traceable to:
+最終答案中的主張應可追溯至：
 
-- database results
-- calculations
-- retrieved documents
+- 資料庫結果
+- 計算過程
+- 檢索到的文件
 
-The system should avoid unsupported claims.
-
----
-
-# 10. Security and Responsible AI
-
-Because the project is explicitly positioned as an enterprise system, basic security concerns must be addressed.
-
-## Prompt injection
-
-Retrieved documents may contain malicious or irrelevant instructions.
-
-The agent must treat retrieved content as data, not as system-level instructions.
+系統應避免沒有依據的主張。
 
 ---
 
-## SQL safety
+# 10. 安全與負責任的 AI
 
-The system should prevent destructive queries such as:
+本專案明確定位為企業系統，因此必須處理基本安全議題。
+
+## 提示注入（Prompt injection）
+
+檢索到的文件可能含有惡意或不相關的指令。
+
+代理必須把檢索內容視為資料，而非系統層級指令。
+
+---
+
+## SQL 安全
+
+系統應防止破壞性查詢，例如：
 
 ```text
 DROP
@@ -430,445 +430,445 @@ INSERT
 ALTER
 ```
 
-unless there is a deliberate future requirement to support them.
+除非未來有刻意需求要支援這些操作。
 
-Initial scope should be read-only.
-
----
-
-## Data access
-
-The system should not expose unnecessary customer-level information.
-
-For example, a business question such as:
-
-> "How many VIP customers do we have?"
-
-should not require passing every customer record to the LLM.
-
-The architecture should favor aggregation and data minimization.
+初期範圍應為唯讀。
 
 ---
 
-## Unsupported requests
+## 資料存取
 
-The agent should refuse or redirect requests when:
+系統不應揭露不必要的客戶層級資訊。
 
-- data does not exist
-- the question cannot be answered reliably
-- required permissions are unavailable
-- the evidence does not support the claim
+例如，這類業務問題：
 
----
+> 「我們有多少 VIP 客戶？」
 
-# 11. Evaluation Framework
+不應需要把每一筆客戶紀錄傳給 LLM。
 
-Evaluation is a mandatory component.
-
-The project should build a benchmark containing approximately **50–100 business questions**.
-
-Questions should cover several categories:
-
-### Simple SQL
-
-> "What was revenue in 2025?"
-
-### Analytical
-
-> "Which market contributed most to the decline?"
-
-### Multi-step
-
-> "Which customer segment experienced the largest decline and what products drove it?"
-
-### Knowledge retrieval
-
-> "What is the definition of VIP?"
-
-### Causal reasoning
-
-> "Did Campaign A cause revenue to increase?"
-
-### Adversarial / unsupported
-
-> "Give me customer information that isn't in the database."
+架構應偏好彙總與資料最小化。
 
 ---
 
-# 12. Evaluation Metrics
+## 不支援的請求
 
-Potential metrics include:
+在下列情況，代理應拒絕或改道：
 
-## SQL correctness
-
-Percentage of generated SQL queries that are semantically correct.
-
-## Numerical correctness
-
-Percentage of final numerical answers that match independently calculated results.
-
-## Retrieval accuracy
-
-Whether the correct supporting document appears in the top-k retrieved documents.
-
-## Groundedness
-
-Whether claims in the answer are supported by retrieved documents or computed results.
-
-## Refusal accuracy
-
-Whether the system correctly refuses questions that cannot be reliably answered.
-
-## Latency
-
-Measure:
-
-- total response time
-- SQL execution time
-- retrieval time
-- LLM generation time
-
-## Cost
-
-Track:
-
-- input/output tokens
-- estimated LLM cost
-- cost per question
-
-Exact target metrics should be established only after the baseline is implemented.
+- 資料不存在
+- 問題無法可靠作答
+- 缺少所需權限
+- 證據不足以支持該主張
 
 ---
 
-# 13. Baseline Comparison
+# 11. 評估架構
 
-The project should include at least one baseline.
+評估是必要元件。
 
-## Baseline
+專案應建立一份約含 **50–100 題業務問題** 的基準集（benchmark）。
 
-A simple RAG / LLM approach with minimal tool use.
+問題應涵蓋多個類別：
 
-## Proposed system
+### 簡單 SQL
 
-Tool-using analytics agent with:
+> 「2025 年營收是多少？」
+
+### 分析性
+
+> 「哪個市場對下滑的貢獻最大？」
+
+### 多步驟
+
+> 「哪個客戶分群下滑最大，又是哪些產品造成的？」
+
+### 知識檢索
+
+> 「VIP 的定義是什麼？」
+
+### 因果推理
+
+> 「活動 A 是否造成營收增加？」
+
+### 對抗性／無依據
+
+> 「給我資料庫裡沒有的客戶資訊。」
+
+---
+
+# 12. 評估指標
+
+可能的指標包括：
+
+## SQL 正確性
+
+產生的 SQL 在語意上正確的比例。
+
+## 數值正確性
+
+最終數值答案與獨立計算結果相符的比例。
+
+## 檢索準確度
+
+正確的佐證文件是否出現在 top-k 檢索結果中。
+
+## 有依據程度（Groundedness）
+
+答案中的主張是否由檢索文件或計算結果支持。
+
+## 拒絕正確性
+
+系統是否正確拒絕無法可靠作答的問題。
+
+## 延遲
+
+量測：
+
+- 總回應時間
+- SQL 執行時間
+- 檢索時間
+- LLM 生成時間
+
+## 成本
+
+追蹤：
+
+- 輸入／輸出 token
+- 估計 LLM 成本
+- 每題成本
+
+確切目標指標應在基準實作完成後才訂定。
+
+---
+
+# 13. 基準比較
+
+專案應至少包含一個基準系統。
+
+## 基準（Baseline）
+
+簡單的 RAG／LLM 做法，工具使用很少。
+
+## 建議系統
+
+會使用工具的分析代理，具備：
 
 - SQL
-- Python analytics
-- semantic layer
+- Python 分析
+- 語意層
 - RAG
-- validation
-- guardrails
+- 驗證
+- 護欄
 
-Compare both systems using the benchmark.
+以基準集比較兩套系統。
 
-Potential evaluation table:
+可能的評估表：
 
-| Metric | Baseline | Proposed |
+| 指標 | 基準 | 建議系統 |
 |---|---:|---:|
-| SQL correctness | TBD | TBD |
-| Numerical correctness | TBD | TBD |
-| Retrieval accuracy | TBD | TBD |
-| Groundedness | TBD | TBD |
-| Correct refusal | TBD | TBD |
-| Median latency | TBD | TBD |
-| Estimated cost/query | TBD | TBD |
+| SQL 正確性 | TBD | TBD |
+| 數值正確性 | TBD | TBD |
+| 檢索準確度 | TBD | TBD |
+| 有依據程度 | TBD | TBD |
+| 正確拒絕 | TBD | TBD |
+| 延遲中位數 | TBD | TBD |
+| 估計每查詢成本 | TBD | TBD |
 
-**Results must be measured rather than predetermined.**
+**結果必須實測量測，不得預先指定。**
 
 ---
 
-# 14. Cost and Latency Optimization
+# 14. 成本與延遲優化
 
-The project should investigate whether every question needs the same level of LLM reasoning.
+專案應探討是否每道問題都需要同等程度的 LLM 推理。
 
-Possible routing:
+可能的路由：
 
 ```text
-Simple SQL question
+簡單 SQL 問題
         ↓
-Low-cost / deterministic path
+低成本／確定性路徑
 
-Complex analytical question
+複雜分析問題
         ↓
-Stronger reasoning + Python
+較強推理＋Python
 
-Knowledge question
+知識問題
         ↓
-Retrieval-focused path
+以檢索為主的路徑
 ```
 
-The objective is not simply maximum model capability.
+目標不是單純追求模型能力極大化。
 
-The objective is:
+目標是：
 
-> **appropriate capability at acceptable cost and latency.**
-
----
-
-# 15. Failure Analysis
-
-A dedicated section of the project should document what does not work.
-
-Examples of questions to investigate:
-
-- Does RAG actually improve structured analytics?
-- Does multi-agent architecture improve accuracy enough to justify its complexity?
-- Does a larger LLM materially improve results?
-- How often does the agent generate semantically valid but business-invalid SQL?
-- When does the agent hallucinate?
-- When does it fail to refuse unsupported questions?
-- What happens when data is missing?
-- What happens when business definitions conflict?
-
-The project should document:
-
-1. observed failure
-2. root cause
-3. mitigation
-4. residual limitation
-
-This section is deliberately important because it demonstrates engineering judgment rather than only successful demos.
+> **在可接受的成本與延遲下，使用適當的能力。**
 
 ---
 
-# 16. Project Deliverables
+# 15. 失敗分析
 
-## GitHub repository
+專案應有專章記錄「什麼行不通」。
 
-A clean, reproducible repository containing:
+可調查的問題範例：
 
-- source code
-- configuration
-- data generation / preparation
-- evaluation framework
-- tests
-- documentation
+- RAG 是否真的能改善結構化分析？
+- 多代理架構對準確度的提升，是否足以合理化其複雜度？
+- 更大的 LLM 是否實質改善結果？
+- 代理產生「語意有效但業務無效」的 SQL 有多頻繁？
+- 代理何時會幻覺？
+- 何時未能拒絕無依據的問題？
+- 資料缺失時會發生什麼？
+- 業務定義衝突時會發生什麼？
 
----
+專案應記錄：
 
-## Architecture diagram
+1. 觀察到的失敗
+2. 根本原因
+3. 緩解措施
+4. 剩餘限制
 
-A clear system architecture showing:
-
-- user
-- agent
-- tools
-- database
-- retrieval
-- analytics
-- validation
-- output
+此章節刻意重要，因為它展示的是工程判斷，而不只是成功示範。
 
 ---
 
-## Evaluation report
+# 16. 專案交付物
 
-Include:
+## GitHub 儲存庫
 
-- benchmark design
-- metrics
-- baseline
-- results
-- error analysis
-- limitations
+乾淨、可重現的儲存庫，包含：
 
----
-
-## Technical write-up
-
-Target approximately 1,500–2,000 words.
-
-Possible title:
-
-> **Building a Reliable AI Analytics Agent for Enterprise Data**
-
-Topics:
-
-- problem framing
-- architecture
-- tool selection
-- semantic layer
-- retrieval
-- validation
-- security
-- evaluation
-- trade-offs
-- lessons learned
+- 原始碼
+- 設定
+- 資料產生／準備
+- 評估架構
+- 測試
+- 文件
 
 ---
 
-## Demo
+## 架構圖
 
-A 2–5 minute demonstration showing a realistic question progressing through:
+清楚的系統架構，呈現：
+
+- 使用者
+- 代理
+- 工具
+- 資料庫
+- 檢索
+- 分析
+- 驗證
+- 輸出
+
+---
+
+## 評估報告
+
+包含：
+
+- 基準集設計
+- 指標
+- 基準系統
+- 結果
+- 錯誤分析
+- 限制
+
+---
+
+## 技術撰寫
+
+目標約 1,500–2,000 字。
+
+可能標題：
+
+> **為企業資料打造可靠的 AI 分析代理**
+
+主題：
+
+- 問題界定
+- 架構
+- 工具選擇
+- 語意層
+- 檢索
+- 驗證
+- 安全
+- 評估
+- 取捨
+- 學到的教訓
+
+---
+
+## 示範
+
+2–5 分鐘示範，展示一道真實問題如何依序經過：
 
 ```text
-Question
+問題
    ↓
-Agent reasoning / tool selection
+代理推理／工具選擇
    ↓
 SQL
    ↓
-Analytics
+分析
    ↓
-Validation
+驗證
    ↓
-Answer
+答案
    ↓
-Evidence
+證據
 ```
 
-The demo should emphasize system behaviour rather than UI polish.
+示範應強調系統行為，而非 UI 精緻度。
 
 ---
 
-# 17. Scope Management
+# 17. 範圍管理
 
-The project should be implemented in three stages.
+專案應分三階段實作。
 
-## V1 — Working Prototype
+## V1 — 可運作原型
 
-Target: approximately 2–3 weeks.
+目標：約 2–3 週。
 
-Must include:
+必須包含：
 
-- synthetic enterprise dataset
-- SQL tool
-- basic RAG
-- basic agent orchestration
-- several representative questions
-- basic answer generation
+- 合成企業資料集
+- SQL 工具
+- 基本 RAG
+- 基本代理編排
+- 數道代表性問題
+- 基本答案產生
 
-Goal:
+目標：
 
-> Demonstrate that the end-to-end concept works.
-
----
-
-## V2 — Reliability
-
-Target: approximately 2–3 weeks.
-
-Add:
-
-- business semantic layer
-- evaluation benchmark
-- SQL validation
-- numerical validation
-- grounded answers
-- refusal behaviour
-- failure analysis
-- baseline comparison
-
-Goal:
-
-> Demonstrate that the system is reliable enough to be taken seriously.
+> 證明端到端概念可行。
 
 ---
 
-## V3 — Production-oriented polish
+## V2 — 可靠性
 
-Target: approximately 1–2 weeks.
+目標：約 2–3 週。
 
-Add:
+加入：
+
+- 業務語意層
+- 評估基準集
+- SQL 驗證
+- 數值驗證
+- 有依據的答案
+- 拒絕行為
+- 失敗分析
+- 基準比較
+
+目標：
+
+> 證明系統可靠到足以被認真看待。
+
+---
+
+## V3 — 偏生產導向的打磨
+
+目標：約 1–2 週。
+
+加入：
 
 - API
 - Docker
-- automated tests
+- 自動化測試
 - CI
-- logging
-- latency measurement
-- cost tracking
-- security controls
-- improved documentation
-- demo
+- 日誌
+- 延遲量測
+- 成本追蹤
+- 安全控管
+- 改善文件
+- 示範
 
-Goal:
+目標：
 
-> Demonstrate production-oriented engineering judgment.
-
----
-
-# 18. Explicit Non-Goals
-
-To prevent scope creep, the first version will **not** attempt to build:
-
-- a general-purpose autonomous agent
-- a multi-agent framework without demonstrated need
-- a full enterprise data warehouse
-- a production-grade IAM system
-- Kubernetes infrastructure
-- dozens of microservices
-- a highly polished frontend
-- a general-purpose ChatGPT clone
-
-Technical complexity should be introduced only when it supports a clearly demonstrated requirement.
+> 展示偏生產導向的工程判斷。
 
 ---
 
-# 19. What This Project Should Prove
+# 18. 明確非目標
 
-At the end of the project, a hiring manager should be able to conclude:
+為避免範圍膨脹，第一版**不會**嘗試打造：
 
-> This candidate understands business analytics and machine learning, but is not limited to traditional predictive modelling.
+- 通用自主代理
+- 未經證明需求的多代理框架
+- 完整企業資料倉儲
+- 生產級 IAM 系統
+- Kubernetes 基礎設施
+- 數十個微服務
+- 高度打磨的前端
+- 通用 ChatGPT 複製品
 
-> He understands how LLMs can interact with structured enterprise data and unstructured knowledge.
-
-> He understands that LLM outputs cannot simply be trusted.
-
-> He knows when deterministic computation is preferable to generative reasoning.
-
-> He understands evaluation, failure modes, security, cost, and latency.
-
-> He can build a coherent AI system rather than just a notebook or chatbot.
-
-This is the intended value of the project.
+技術複雜度只應在能清楚支持已證明需求時才引入。
 
 ---
 
-# 20. Career Positioning
+# 19. 本專案應證明什麼
 
-This project should support the following professional narrative:
+專案結束時，招聘主管應能得出：
 
-> **Senior Applied Data Scientist with deep enterprise experience in customer analytics, predictive modelling and business decision-making, now extending that experience into modern AI systems and production-oriented GenAI applications.**
+> 這位候選人理解業務分析與機器學習，但不侷限於傳統預測建模。
 
-The project is therefore **not** intended to prove that I am an AI researcher.
+> 他理解 LLM 如何與結構化企業資料及非結構化知識互動。
 
-It is intended to demonstrate that I can operate at the intersection of:
+> 他理解不能直接信任 LLM 輸出。
+
+> 他知道何時確定性計算優於生成式推理。
+
+> 他理解評估、失敗模式、安全、成本與延遲。
+
+> 他能打造一套前後一致的 AI 系統，而不只是 notebook 或聊天機器人。
+
+這就是本專案預期的價值。
+
+---
+
+# 20. 職涯定位
+
+本專案應支撐以下專業敘事：
+
+> **資深應用資料科學家，在客戶分析、預測建模與業務決策上具備深厚企業經驗，並將該經驗延伸至現代 AI 系統與偏生產導向的 GenAI 應用。**
+
+因此，本專案**不是**要證明我是 AI 研究員。
+
+而是要證明我能在下列交會處運作：
 
 ```text
-Business
+業務
    +
-Data Science
+資料科學
    +
-Machine Learning
+機器學習
    +
-Modern AI
+現代 AI
    +
-Enterprise Engineering
+企業工程
 ```
 
-This positioning is more consistent with my existing experience and target roles.
+此定位更符合我既有經驗與目標職缺。
 
 ---
 
-# 21. Immediate Next Steps
+# 21. 立即下一步
 
-Before writing significant production code, finalize the following:
+在撰寫大量生產程式碼之前，先完成下列事項：
 
-1. Define the exact business scenario.
-2. Define the synthetic data schema.
-3. Define 10–15 representative user questions.
-4. Categorize each question as:
+1. 定義確切業務情境。
+2. 定義合成資料 schema。
+3. 定義 10–15 道代表性使用者問題。
+4. 將每道問題分類為：
    - SQL
-   - analytical
+   - 分析性
    - RAG
-   - multi-tool
-   - unsupported / refusal
-5. Define the minimum V1 architecture.
-6. Select the technology stack.
-7. Create the repository structure.
-8. Implement the simplest end-to-end baseline.
-9. Establish the evaluation benchmark.
-10. Iterate toward V2 and V3 based on measured failures.
+   - 多工具
+   - 不支援／應拒絕
+5. 定義最低限度的 V1 架構。
+6. 選定技術堆疊。
+7. 建立儲存庫結構。
+8. 實作最簡單的端到端基準。
+9. 建立評估基準集。
+10. 依量測到的失敗迭代至 V2 與 V3。
 
-**The scope should be locked before implementation begins.**
+**實作開始前應先鎖定範圍。**
