@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Data artifacts (keep generators and seed schemas; ignore large dumps)
+data/synthetic/generated/
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs and evaluation run outputs
+logs/
+eval/results/runs/
+*.log
+
+# Secrets
+*.pem
+*.key
+credentials.json
