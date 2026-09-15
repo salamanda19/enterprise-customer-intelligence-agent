@@ -1,24 +1,26 @@
 # Evaluation
 
-Mandatory for V2. Target a 50–100 question benchmark.
+Mandatory for V2. Contracts for SSOT Q1–Q15 (+ RevPAR) live in `questions/contracts.yaml` from I1—**no expected amounts**.
 
-## Question categories
+## Question types (SSOT §15)
 
-- Simple SQL
+- Deterministic
 - Analytical
-- Multi-step
-- Knowledge retrieval
-- Causal reasoning (expect refusal / association-not-causation)
-- Adversarial / unsupported
+- Knowledge
+- Should-refuse (may still downgrade or attach allowed subsets)
 
-## Metrics (targets after baseline exists)
+Plus four **response modes**: full / declare / downgrade / refuse, with reason codes.
 
-SQL correctness, numerical correctness, retrieval accuracy, groundedness, refusal accuracy, latency, cost.
+## Metrics
 
-## Baseline
+Behavioural gates are pre-registered (mode/reason 100%, prohibited claims 0, figures match golden). Generative metrics (groundedness quality, naive-LLM gap, latency/cost) are set after the first full V2 run.
 
-Compare a minimal RAG/LLM path against the tool-using agent. Results must be measured, not assumed.
+## Baseline naming
 
-`questions/` — benchmark items  
-`baseline/` — baseline runner (later)  
+- **golden runner** — deterministic metrics vs frozen DB  
+- **naive-LLM baseline** — minimal RAG/LLM path for comparison  
+
+`questions/` — contracts  
+`baseline/` — naive runner (later)  
+`goldens/` — generated later (I3+)  
 `results/` — committed summaries; ignore large run dumps

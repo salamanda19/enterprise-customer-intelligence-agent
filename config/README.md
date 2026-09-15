@@ -1,5 +1,15 @@
 # Configuration
 
-Consolidate runtime settings in YAML or Python files in this directory.
+Runtime behaviour is consolidated in YAML under this directory (not environment-variable sprawl).
 
-Do not scatter behaviour behind environment variables. Secrets (API keys) stay out of git; use a local secret file that is gitignored, referenced from a checked-in config template if needed.
+| File | Role |
+|------|------|
+| `app.yaml` | Paths, DuckDB, model name, routing |
+| `semantic.yaml` | SSOT projection: entities, defaults, tiers, metrics |
+| `policy.yaml` | Modes, reason codes, conflict rule, out-of-scope cues |
+| `secrets.example.yaml` | Template for API keys |
+| `secrets.yaml` | Local secrets (**gitignored**) |
+
+```bash
+copy config\secrets.example.yaml config\secrets.yaml
+```

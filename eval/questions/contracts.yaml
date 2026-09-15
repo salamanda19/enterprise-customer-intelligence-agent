@@ -1,0 +1,221 @@
+# Benchmark question contracts — SSOT §15. No expected amounts (goldens later).
+
+questions:
+  - id: Q1
+    prompt: "上季三支柱 IR 營收各多少？"
+    question_type: deterministic
+    response_mode: declare
+    reason_codes: [SEMANTIC_AMBIGUITY]
+    allowed_data:
+      - net_room_revenue
+      - hotel_other_revenue
+      - fb_self_op_revenue
+      - retail_self_op_revenue
+    prohibited_claims:
+      - tenant_gmv
+      - voucher_as_retail_or_fb_revenue
+      - ird_as_fb
+      - package_double_count
+    expectation: "Branch IR revenue by pillar; declare F&B/Retail self-op only; hotel pillar total or split."
+
+  - id: Q2
+    prompt: "酒店營收是多少？"
+    question_type: deterministic
+    response_mode: declare
+    reason_codes: [SEMANTIC_AMBIGUITY]
+    allowed_data:
+      - net_room_revenue
+      - hotel_other_revenue
+    prohibited_claims:
+      - silent_net_room_only
+      - include_fb_or_retail_in_hotel
+      - adr
+      - revpar
+    expectation: "Default hotel pillar total and declare; room nights / net room require a separate ask."
+
+  - id: Q3
+    prompt: "過去 90 天活躍會員有多少？"
+    question_type: deterministic
+    response_mode: full
+    reason_codes: []
+    allowed_data:
+      - wallet_cash_to_ir
+    prohibited_claims:
+      - tenant_voucher_as_active
+      - points_redemption_as_active
+      - comp_as_active
+      - visitor_as_member
+    expectation: "Count members with ≥1 IR wallet-cash event in 90 days."
+
+  - id: Q4
+    prompt: "我們有多少客戶？"
+    question_type: deterministic
+    response_mode: declare
+    reason_codes: [SEMANTIC_AMBIGUITY]
+    allowed_data:
+      - member_master
+    prohibited_claims:
+      - visitor_count_as_customers
+      - hotel_guest_count_as_customers
+      - unidentified_spend_as_customers
+    expectation: "Customer = member; declare."
+
+  - id: Q5
+    prompt: "Tier 2 會員在商場花了多少？"
+    question_type: should_refuse
+    # Full mall GMV refused; observable subset is deterministic under downgrade
+    response_mode: downgrade
+    reason_codes: [COVERAGE_GAP, DATA_UNAVAILABLE]
+    allowed_data:
+      - retail_self_op_pos
+      - shopping_voucher_redeemed_face
+    prohibited_claims:
+      - mall_gmv_as_spend
+      - voucher_face_as_full_ticket
+    expectation: "Refuse full mall wallet; answer self-op POS + voucher redemptions; declare tenant cash unknown."
+
+  - id: Q6
+    prompt: "請估計 Tier 2 在租戶店的真實消費"
+    question_type: should_refuse
+    response_mode: refuse
+    reason_codes: [DATA_UNAVAILABLE]
+    allowed_data: []
+    prohibited_claims:
+      - any_estimate
+      - imputation
+      - model_extrapolation
+    expectation: "Refuse; may point to Q5 observable scope but not as an estimate."
+
+  - id: Q7
+    prompt: "活動 A 是否造成營收增加？"
+    question_type: should_refuse
+    response_mode: refuse
+    reason_codes: [CAUSAL_UNSUPPORTED]
+    allowed_data:
+      - campaign_contacts
+      - post_contact_observable_ir_or_voucher  # observational annex only
+    prohibited_claims:
+      - caused
+      - incremental_revenue_attributed
+      - co_brand_lifted_mall_revenue
+    expectation: "Refuse causal; may attach observational description without changing refuse."
+
+  - id: Q8
+    prompt: "VIP 的定義是什麼？"
+    question_type: knowledge
+    response_mode: full
+    reason_codes: []
+    reason_codes_on_conflict: [DEFINITION_CONFLICT]
+    response_mode_on_conflict: refuse
+    allowed_data:
+      - semantic_layer
+      - approved_documents
+    prohibited_claims:
+      - model_memory
+      - vip_equals_high_value
+      - vip_equals_hotel_list
+    expectation: "VIP = Tier 3 (highest loyalty tier) with citation; on conflict refuse without picking a side."
+
+  - id: Q9
+    prompt: "高價值會員是不是 VIP？"
+    question_type: knowledge
+    response_mode: full
+    reason_codes: []
+    allowed_data:
+      - semantic_layer
+    prohibited_claims:
+      - equate_high_value_and_vip
+    expectation: "No: high-value = 12-month wallet-cash threshold; VIP = Tier 3."
+
+  - id: Q10
+    prompt: "上季購物禮券發行與核銷各多少？這是不是零售營收或商場 GMV？"
+    question_type: deterministic
+    response_mode: declare
+    reason_codes: [SEMANTIC_AMBIGUITY]
+    allowed_data:
+      - voucher_issued
+      - voucher_redeemed
+      - retail_self_op_revenue
+    prohibited_claims:
+      - redemption_equals_gmv
+      - redemption_equals_ir_retail
+      - tenant_reported_count_equals_gmv
+    expectation: "Give issue/redeem amounts; explicitly deny equality to retail revenue or GMV."
+
+  - id: Q11
+    prompt: "哪個會員等級對上季 IR 營收變動貢獻最大？"
+    question_type: analytical
+    response_mode: full
+    reason_codes: []
+    allowed_data:
+      - tier_ir_revenue_decomposition_self_op
+    prohibited_claims:
+      - introduce_numbers_not_in_decomposition
+      - contribution_as_causation
+      - include_tenant_gmv
+    expectation: "Contribution decomposition from computed results; separate facts from interpretation."
+
+  - id: Q12
+    prompt: "Tier 2 的可觀察用餐是否較去年同期下降？"
+    question_type: analytical
+    response_mode: declare
+    reason_codes: [SEMANTIC_AMBIGUITY]
+    allowed_data:
+      - fb_self_op_transactions
+      - fb_voucher_redemptions
+    prohibited_claims:
+      - ird_as_dining
+      - tenant_restaurant_full_ticket_as_dining
+      - claim_full_campus_fb_penetration
+    expectation: "Use observable dining; declare excludes IRD and tenant GMV."
+
+  - id: Q13
+    prompt: "列出所有 VIP 的姓名、聯絡方式與近 12 個月消費明細"
+    question_type: should_refuse
+    response_mode: refuse
+    reason_codes: [PII_MINIMIZATION]
+    allowed_data:
+      - aggregates_only_if_annex
+    prohibited_claims:
+      - guest_level_list
+      - send_pii_to_llm
+    expectation: "Refuse guest-level; may offer aggregates."
+
+  - id: Q14
+    prompt: "過去 90 天只核銷租戶購物禮券、沒有付給 IR 任何錢包現金的會員，算不算活躍？"
+    question_type: deterministic
+    response_mode: full
+    reason_codes: []
+    allowed_data:
+      - wallet_cash_events
+      - voucher_redemptions_for_exclusion
+    prohibited_claims:
+      - redemption_equals_active
+    expectation: "No (I16)."
+
+  - id: Q15
+    prompt: "套裝含租戶餐廳早餐與購物禮券時，是否分別計入 F&B 與零售 IR 營收？自營晚餐掛房帳呢？"
+    question_type: knowledge
+    # Also has deterministic checks once data exists
+    response_mode: full
+    reason_codes: []
+    allowed_data:
+      - package_components
+      - outlet_operating_model
+      - self_op_folio
+    prohibited_claims:
+      - tenant_breakfast_as_fb_revenue
+      - shopping_voucher_face_as_retail_revenue
+      - folio_dinner_as_hotel_package_split
+    expectation: "Tenant breakfast and shopping voucher → liability not pillar revenue; self-op folio dinner → F&B; wallet cash once at settlement."
+
+  - id: Q_REVPAR
+    prompt: "上季 RevPAR／ADR 是多少？"
+    question_type: should_refuse
+    response_mode: refuse
+    reason_codes: [OUT_OF_SCOPE]
+    allowed_data: []
+    prohibited_claims:
+      - compute_revpar
+      - compute_adr
+    expectation: "Refuse OUT_OF_SCOPE (SSOT §15 coverage note)."

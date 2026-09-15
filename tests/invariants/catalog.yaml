@@ -1,0 +1,150 @@
+# Invariant catalog — intents only at I1 (no data tests yet).
+# Align with docs/implementation_plan.md §4.3 and docs/ssot.md §9.
+
+invariants:
+  - id: I1
+    statement: "禮券核銷 ≠ 租戶 GMV"
+    check_intent: "Outputs and metrics must not equate voucher redemption face value to tenant GMV."
+    test_kind: policy_output
+    earliest_milestone: M1
+    coverage: planned
+
+  - id: I2
+    statement: "租戶據點的禮券核銷 ≠ 該支柱 IR 營收"
+    check_intent: "Redemptions at leased outlets must not land in fb_self_op or retail_self_op revenue facts."
+    test_kind: data_generator
+    earliest_milestone: M2
+    coverage: covered
+
+  - id: I3
+    statement: "積分兌換 ≠ 錢包現金"
+    check_intent: "Points redemption events excluded from wallet_cash ledger and active-member qualification."
+    test_kind: metrics_golden
+    earliest_milestone: M3
+    coverage: planned
+
+  - id: I4
+    statement: "積分兌換 ≠ 營收"
+    check_intent: "Points redemption never posted to IR recognized revenue buckets."
+    test_kind: metrics_golden
+    earliest_milestone: M3
+    coverage: planned
+
+  - id: I5
+    statement: "客房用餐 ≠ F&B 營收"
+    check_intent: "IRD rows bucket to hotel_other, never fb_self_op."
+    test_kind: data_generator
+    earliest_milestone: M2
+    coverage: covered
+
+  - id: I6
+    statement: "客房用餐不計入可觀察用餐／餐飲滲透"
+    check_intent: "observable_dining metric excludes IRD."
+    test_kind: metrics_golden
+    earliest_milestone: M3
+    coverage: planned
+
+  - id: I7
+    statement: "租戶 GMV ≠ IR 營收"
+    check_intent: "No tenant GMV fact table; policy refuses or downgrades mall GMV asks."
+    test_kind: policy_output
+    earliest_milestone: M1
+    coverage: planned
+
+  - id: I8
+    statement: "未識別消費 ≠ 客戶數"
+    check_intent: "Member count metric excludes unidentified wallet-cash payers."
+    test_kind: metrics_golden
+    earliest_milestone: M3
+    coverage: planned
+
+  - id: I9
+    statement: "客戶數 ≠ 訪客數 ≠ 住房客數"
+    check_intent: "Three counts are separately computable and not aliased."
+    test_kind: metrics_golden
+    earliest_milestone: M3
+    coverage: planned
+
+  - id: I10
+    statement: "淨房收 ≠ 酒店支柱合計"
+    check_intent: "hotel_pillar_total = net_room + hotel_other; Q2 declares default."
+    test_kind: metrics_golden
+    earliest_milestone: M3
+    coverage: planned
+
+  - id: I11
+    statement: "套裝現金不得雙計"
+    check_intent: "Package sale cash not also counted as component face at recognition."
+    test_kind: data_generator
+    earliest_milestone: M2
+    coverage: covered
+
+  - id: I12
+    statement: "套裝現金守恆：IR 認列 + 在外負債 + breakage ≤ 實收現金"
+    check_intent: "Sample packages satisfy conservation inequality after cancel/refund."
+    test_kind: data_generator
+    earliest_milestone: M2
+    coverage: covered
+
+  - id: I13
+    statement: "錢包現金只在現金事件認列一次；核銷不得再計等級／累點"
+    check_intent: "Redemption events do not create second wallet_cash for paid vouchers/packages."
+    test_kind: data_generator
+    earliest_milestone: M2
+    coverage: covered
+
+  - id: I14
+    statement: "自營禮券核銷可認列該支柱營收，仍不是第二次錢包現金"
+    check_intent: "Self-op redemption posts pillar revenue without duplicate wallet_cash."
+    test_kind: data_generator
+    earliest_milestone: M2
+    coverage: covered
+
+  - id: I15
+    statement: "Comp 禮券 ≠ 錢包現金 ≠ 營收"
+    check_intent: "Comp funding source never creates wallet_cash or IR revenue."
+    test_kind: data_generator
+    earliest_milestone: M2
+    coverage: covered
+
+  - id: I16
+    statement: "租戶禮券核銷不是活躍會員合格事件"
+    check_intent: "Q14 path: tenant-only redeemers in 90d are not active."
+    test_kind: policy_output
+    earliest_milestone: M1
+    coverage: planned
+
+  - id: I17
+    statement: "高價值 ≠ VIP"
+    check_intent: "Semantic/Q9: high_value threshold concept ≠ Tier 3 / VIP."
+    test_kind: policy_output
+    earliest_milestone: M1
+    coverage: planned
+
+  - id: I18
+    statement: "租戶回報核銷件數 ≠ GMV"
+    check_intent: "Synthetic data has count-only tenant-reported redemptions (D35); never an amount/GMV field."
+    test_kind: data_generator
+    earliest_milestone: M2
+    coverage: covered
+
+  - id: I19
+    statement: "禁止估計或插補租戶 GMV"
+    check_intent: "Q6 refuse DATA_UNAVAILABLE; no imputation path."
+    test_kind: policy_output
+    earliest_milestone: M1
+    coverage: planned
+
+  - id: I20
+    statement: "禁止把三本帳合成泛用消費或未限定營收"
+    check_intent: "No merged spend/revenue wide table exposed to the model."
+    test_kind: policy_output
+    earliest_milestone: M1
+    coverage: planned
+
+  - id: I21
+    statement: "掛房帳的自營餐飲營收歸 F&B，不是酒店套裝拆分"
+    check_intent: "Self-op folio dinner posts to fb_self_op; wallet cash once at settlement."
+    test_kind: data_generator
+    earliest_milestone: M2
+    coverage: covered

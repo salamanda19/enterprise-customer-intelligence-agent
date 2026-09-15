@@ -15,6 +15,7 @@ venv/
 # Data artifacts (keep generators and seed schemas; ignore large dumps)
 data/synthetic/generated/
 *.db
+*.duckdb
 *.sqlite
 *.sqlite3
 
@@ -29,7 +30,9 @@ logs/
 eval/results/runs/
 *.log
 
-# Secrets
+# Secrets (never commit)
 *.pem
 *.key
 credentials.json
+config/secrets.yaml
+config/secrets.local.yaml
