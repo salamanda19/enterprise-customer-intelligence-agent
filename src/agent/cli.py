@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
+from agent.meta import attach_meta  # noqa: E402
 from agent.orchestrator import handle  # noqa: E402
-from api.app import attach_meta  # noqa: E402
 
 
 def main(argv: list[str] | None = None) -> int:

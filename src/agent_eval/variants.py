@@ -373,7 +373,12 @@ def write_variants_yaml(path=None) -> Any:
     return path
 
 
-def write_variant_goldens(*, db_path=None, out_path=None) -> Any:
+def write_variant_goldens(*, db_path=None, out_path=None, variants_path=None) -> Any:
+    """Write variant goldens.
+
+    - Default (no out_path): also refreshes repo ``variants.yaml``.
+    - Custom out_path: skips repo YAML unless ``variants_path`` is set (tests should pass a tmp path).
+    """
     import json
     from ecia.data.generate import DEFAULT_DB_PATH
     from tools.analytics.golden_runner import GOLDENS_DIR
@@ -388,5 +393,8 @@ def write_variant_goldens(*, db_path=None, out_path=None) -> Any:
         "questions": questions,
     }
     out.write_text(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
-    write_variants_yaml()
+    if variants_path is not None:
+        write_variants_yaml(path=variants_path)
+    elif out_path is None:
+        write_variants_yaml()
     return out

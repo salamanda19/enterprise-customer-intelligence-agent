@@ -60,7 +60,14 @@ def test_variant_catalog_and_goldens(require_db, tmp_path) -> None:
     specs = build_variant_specs()
     assert len(specs) >= 50
     out = tmp_path / "variant_goldens.json"
-    path = write_variant_goldens(out_path=out)
+    variants_yaml = tmp_path / "variants.yaml"
+    path = write_variant_goldens(out_path=out, variants_path=variants_yaml)
     data = load_goldens(path)
     assert data["count"] == len(specs)
     assert len(data["questions"]) == len(specs)
+    assert variants_yaml.is_file()
+    assert path == out
+    # Must not touch the repo catalog when writing to tmp
+    from agent_eval.variants import VARIANTS_PATH
+
+    assert variants_yaml.resolve() != VARIANTS_PATH.resolve()

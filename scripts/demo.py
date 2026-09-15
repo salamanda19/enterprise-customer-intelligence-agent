@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from api.app import attach_meta  # noqa: E402
+from agent.meta import attach_meta  # noqa: E402
 from agent.orchestrator import handle  # noqa: E402
 from ecia.config_loader import REPO_ROOT, load_yaml  # noqa: E402
 
