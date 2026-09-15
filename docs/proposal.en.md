@@ -62,48 +62,13 @@ The project should strengthen the career narrative:
 
 # 3. Business Scenario
 
-Simulate a large hospitality / retail enterprise with customer and marketing data.
+**Product and business truth is [`ssot.md`](ssot.md) (Traditional Chinese).** This section is only a career-proposal summary; do not treat it as a second SSOT.
 
-The organization has both structured and unstructured information.
+Simulate an anonymous, single-property, non-gaming integrated resort (IR): hotel, F&B (mostly self-operated), retail (mostly leased tenants), plus a free-to-join internal loyalty programme. External loyalty affiliation is a future extension and is out of scope for this version.
 
-## Structured data
+The organization has both structured data (members, stays, self-operated POS, vouchers, campaigns, etc.) and unstructured documents (definitions, briefs, research). Data rights are asymmetric: tenant GMV is not observable by default.
 
-Example entities:
-
-- Customers
-- Bookings
-- Transactions
-- Campaigns
-- Campaign contacts
-- Customer segments
-- Products / properties
-
-## Unstructured data
-
-Example documents:
-
-- Campaign briefs
-- Customer research reports
-- Business reports
-- Product descriptions
-- Management documents
-- Business definitions
-
-Business users should be able to ask questions in natural language without writing SQL.
-
-Examples:
-
-> "What was hotel booking revenue in 2025?"
-
-> "Which customer segment had the largest year-over-year decline?"
-
-> "What contributed most to the Q2 revenue decline?"
-
-> "What is the company's definition of a VIP customer?"
-
-> "Did Campaign A cause revenue to increase?"
-
-The system should determine the appropriate analytical workflow rather than blindly asking an LLM to generate an answer.
+Business users should be able to ask questions in natural language without writing SQL. The system should determine the appropriate analytical workflow rather than blindly asking an LLM to generate an answer. It should refuse questions that cannot be answered reliably, including causal claims and tenant spend.
 
 ---
 
@@ -855,9 +820,9 @@ This positioning is more consistent with my existing experience and target roles
 
 Before writing significant production code, finalize the following:
 
-1. Define the exact business scenario.
+1. Define the exact business scenario. (Locked in [`ssot.md`](ssot.md).)
 2. Define the synthetic data schema.
-3. Define 10–15 representative user questions.
+3. Define 10–15 representative user questions (in [`ssot.md`](ssot.md) §15; numeric/SQL goldens wait on synthetic data).
 4. Categorize each question as:
    - SQL
    - analytical

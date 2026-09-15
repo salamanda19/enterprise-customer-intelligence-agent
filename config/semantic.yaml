@@ -1,0 +1,108 @@
+# Semantic layer — SSOT machine-readable projection (not a second SSOT).
+# Trace: docs/ssot.md §7–§9, decisions D6, D34–D38.
+
+version: 1
+ssot_ref: "docs/ssot.md"
+
+entities:
+  member:
+    description: "Loyalty member with stable member_id"
+  visitor:
+    description: "Any person generating hotel / self-op / voucher events; may be anonymous"
+  hotel_guest:
+    description: "Registered stay guest for a stay; may or may not be a member"
+  customer:
+    # SSOT default: customer == member
+    maps_to: member
+
+synonyms:
+  # Natural-language → canonical entity or concept
+  客戶: customer
+  customer: customer
+  clients: customer
+  VIP: vip  # synonym resolved to tiers.vip_synonym_of (Tier 3)
+  vip: vip
+  活躍會員: active_member
+  高價值會員: high_value_member
+  酒店營收: hotel_pillar_revenue
+  餐飲營收: fb_self_op_revenue
+  零售營收: retail_self_op_revenue
+
+defaults:
+  customer_means: member
+  customer_declare: "客戶預設指會員（member），不含未識別訪客或住房客數。"
+  hotel_revenue_means: hotel_pillar_total  # net_room + hotel_other
+  hotel_revenue_declare: "酒店營收預設為酒店支柱合計（淨房收 + 酒店其他），非淨房收單項。"
+  fb_revenue_means: fb_self_op_only
+  fb_revenue_declare: "F&B 營收僅含自營餐飲；不含客房用餐、不含租戶餐廳 GMV。"
+  retail_revenue_means: retail_self_op_only
+  retail_revenue_declare: "零售營收僅含自營零售；不含租戶 GMV、不含禮券核銷面額。"
+
+tiers:
+  # Tier 1 = entry (lowest); Tier 3 = highest = VIP synonym (SSOT D37)
+  names:
+    - "Tier 1"
+    - "Tier 2"
+    - "Tier 3"
+  entry: "Tier 1"
+  highest: "Tier 3"
+  vip_synonym_of: "Tier 3"
+  vip_declare: "本版 VIP＝Tier 3（最高忠誠等級）；不等於高價值，也不等於飯店名單 VIP。"
+  # Rank thresholds (wallet cash over qualification window) — lock after data freeze if needed
+  # For now only names are locked; qualification bands may be set when generator exists.
+  qualification_window_days: null
+
+loyalty:
+  free_join: true
+  points_expire: false
+  # Generator convention only (D36) — not a product FX promise
+  points_per_wallet_cash_unit: 1.0
+  active_member:
+    window_days: 90
+    qualifying_event: wallet_cash_to_ir
+    not_qualifying:
+      - tenant_voucher_redemption
+      - points_redemption
+      - comp_voucher
+  high_value_member:
+    window_days: 365
+    # Placeholder until WP-206 (D38): lock after synthetic data freeze
+    wallet_cash_threshold: 900
+    threshold_status: "locked_after_data_freeze"
+
+metrics:
+  net_room_revenue:
+    description: "Uncancelled net room revenue; includes package room allocation; excludes IRD and vouchers"
+  hotel_other_revenue:
+    description: "In-room dining, voucher/package breakage, other allowed hotel non-room"
+  hotel_pillar_total:
+    description: "net_room_revenue + hotel_other_revenue"
+  fb_self_op_revenue:
+    description: "Self-operated F&B only"
+  retail_self_op_revenue:
+    description: "Self-operated retail only"
+  observable_dining:
+    description: "Self-op F&B transactions ∪ F&B voucher redemptions; excludes IRD"
+  observable_shopping:
+    description: "Self-op retail transactions ∪ shopping voucher redemptions"
+  observable_retail_for_q5:
+    description: "Same as observable_shopping for mall GMV downgrade path"
+  active_member_count:
+    description: "Members with ≥1 IR wallet-cash event in last 90 days"
+  member_count:
+    description: "Count of members (default answer for 客戶)"
+  voucher_issued_amount:
+    description: "Face value issued"
+  voucher_redeemed_amount:
+    description: "Face value redeemed; ≠ GMV ≠ IR retail revenue"
+
+ledgers:
+  # Three books — never merge into generic spend/revenue
+  - wallet_cash
+  - ir_recognized_revenue
+  - observable_non_revenue_events
+
+definition_authority:
+  # No conflict: semantic layer wins; approved docs may be cited
+  # Conflict among approved sources: refuse with DEFINITION_CONFLICT (do not pick a side)
+  on_conflict: refuse_definition_conflict

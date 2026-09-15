@@ -1,0 +1,86 @@
+# Policy layer — response modes, reason codes, boundaries (not IAM).
+# Trace: docs/ssot.md §10–§11, D28–D29.
+
+version: 1
+ssot_ref: "docs/ssot.md"
+
+response_modes:
+  full: "完整作答"
+  declare: "聲明後作答"
+  downgrade: "降級"
+  refuse: "拒絕"
+
+# Allowed reason codes only (ACCESS_RESTRICTED intentionally absent)
+reason_codes:
+  - SEMANTIC_AMBIGUITY
+  - COVERAGE_GAP
+  - DATA_UNAVAILABLE
+  - CAUSAL_UNSUPPORTED
+  - INSUFFICIENT_EVIDENCE
+  - DEFINITION_CONFLICT
+  - OUT_OF_SCOPE
+  - PII_MINIMIZATION
+
+forbidden_reason_codes:
+  - ACCESS_RESTRICTED
+
+definition_conflict:
+  # Two-branch rule (SSOT §6.2 / §11)
+  no_conflict: "Use semantic layer; approved documents may be cited as evidence."
+  conflict: "Do not pick a side. Refuse with DEFINITION_CONFLICT until SSOT is updated."
+
+out_of_scope_keywords:
+  - RevPAR
+  - ADR
+  - 博彩
+  - gaming
+  - casino
+  - 租戶 P&L
+  - tenant P&L
+  - 抽成
+  - 租金報表
+
+causal_keywords:
+  - 造成
+  - 導致
+  - 歸因
+  - uplift
+  - incremental
+  - caused
+  - because of the campaign
+  - 活動帶來了多少營收
+
+pii_request_patterns:
+  - 列出所有
+  - 姓名
+  - 聯絡方式
+  - phone
+  - email
+  - 逐客
+  - member list with contact
+
+tenant_gmv_patterns:
+  - 商場花了多少
+  - 租戶.*真實消費
+  - 估計.*租戶
+  - 插補
+  - GMV
+  - 商場錢包
+
+imputation_patterns:
+  - 估計
+  - 推估
+  - 插補
+  - impute
+  - estimate.*tenant
+
+# Question-id → expected mode / codes (manual contract table for M1; eval/questions is source of truth)
+question_contracts_ref: "eval/questions"
+
+prohibited_claim_patterns:
+  - "禮券核銷即租戶GMV"
+  - "voucher redemption is GMV"
+  - "tenant GMV"
+  - "IRD is F&B"
+  - "points redemption is revenue"
+  - "ACCESS_RESTRICTED"

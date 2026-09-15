@@ -1,53 +1,66 @@
 # Enterprise Customer Intelligence Agent
 
-A grounded AI analytics system for natural-language exploration of customer and marketing data.
+Grounded AI analytics for natural-language questions over a synthetic **non-gaming integrated resort** (hotel + F&B + retail + loyalty).
 
-This repository is the implementation home for a hospitality/retail **enterprise customer intelligence** prototype. The LLM orchestrates tools; numerical answers and business definitions come from deterministic SQL, analytics, and an explicit semantic layer.
+The LLM orchestrates tools. Numbers and business definitions come from a semantic layer, deterministic SQL/analytics, and approved documents—not from model memory.
 
 ## Status
 
-Scaffold only. Scope, schema, and stack are not locked yet. Implementation has not started.
+**I1 (semantic / policy) in progress.** Planning is locked:
 
-## Intended architecture (V1+)
+- [`docs/ssot.md`](docs/ssot.md) — product SSOT
+- [`docs/implementation_plan.md`](docs/implementation_plan.md) — architecture & phases
+- [`docs/work_plan.md`](docs/work_plan.md) — execution tasks
+
+Physical DuckDB schema and the agent loop are **not** started yet (I2+). Do not treat chat as progress before M3 goldens.
+
+## Intended architecture
 
 ```text
-User question → Agent orchestration
-                 ├── SQL / database (read-only)
-                 ├── Python analytics
-                 ├── Document retrieval (RAG)
-                 └── Business metadata / semantic layer
-                              ↓
-                    Validation / guardrails
-                              ↓
-                    Answer + evidence
+User question → Pre-flight policy
+                 → Agent / tools (SQL RO, named metrics, RAG)
+                 → Evidence pack
+                 → Validation
+                 → full | declare | downgrade | refuse + reason codes + figures
 ```
 
 ## Repository layout
 
 | Path | Purpose |
 |------|---------|
-| `src/` | Agent, tools, semantic layer, validation, security |
-| `data/` | Synthetic enterprise data and unstructured documents |
-| `config/` | Non-secret configuration (YAML/Python), not environment-variable sprawl |
-| `eval/` | Benchmark questions, metrics, baseline comparison |
-| `tests/` | Automated tests (added from V2/V3) |
-| `docs/` | Architecture, evaluation report, technical write-up |
-| `scripts/` | Data generation and operational helpers |
-| `deploy/` | Docker / later packaging (V3) |
+| `src/` | Packages: `semantic`, `policy`, `tools`, `agent`, `validation`, `ecia` |
+| `config/` | `app.yaml`, `semantic.yaml`, `policy.yaml` (behaviour); secrets gitignored |
+| `data/` | Synthetic IR world + approved documents (generator in I2) |
+| `eval/questions/` | Q1–Q15 + RevPAR contracts (no amounts yet) |
+| `tests/invariants/` | I1–I21 catalog |
+| `docs/` | SSOT, plans, later architecture / evaluation / writeup |
+| `scripts/` | Rebuild helpers (I2+) |
+| `deploy/` | Docker later (V3) |
 
 ## Delivery stages
 
-1. **V1 — Working prototype**: synthetic data, SQL tool, basic RAG, single agent, representative questions.
-2. **V2 — Reliability**: semantic layer, benchmark, validation, refusal, baseline comparison, failure analysis.
-3. **V3 — Production-oriented polish**: API, Docker, CI, logging, cost/latency, documentation, demo.
+1. **V1** — Semantic/policy first, then synthetic data, golden runner, CLI agent with real downgrade/refuse  
+2. **V2** — Full Q1–Q15, validators, naive-LLM baseline, failure analysis  
+3. **V3** — API, Docker, CI, cost/latency, writeup, demo  
 
-## Explicit non-goals (especially V1)
+## Setup
 
-General-purpose autonomous agents, unjustified multi-agent frameworks, a full EDW, production IAM, Kubernetes, microservice sprawl, a polished frontend, or a ChatGPT clone.
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+pip install -e ".[dev]"
+pytest
+```
 
-## Next steps before coding
+Copy `config/secrets.example.yaml` → `config/secrets.yaml` when you need an API key (optional; V1 CLI does not call the LLM).
 
-1. Lock business scenario and synthetic schema.
-2. Define 10–15 representative questions by type (SQL / analytical / RAG / multi-tool / refusal).
-3. Freeze minimum V1 architecture and technology stack.
-4. Implement the simplest end-to-end baseline.
+```bash
+python scripts/rebuild_db.py      # once / when schema changes (heavier)
+python scripts/build_goldens.py   # refresh numeric goldens
+python -m agent.cli --question-id Q5 --json
+python scripts/v1_smoke.py        # light smoke; no rebuild by default
+```
+
+## Next implementation slice
+
+**I5** per [`docs/work_plan.md`](docs/work_plan.md): remaining metrics (Q2/Q11/Q12/Q15), full goldens, validators.

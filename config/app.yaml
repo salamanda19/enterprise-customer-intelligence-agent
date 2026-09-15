@@ -1,0 +1,32 @@
+# Application behaviour — checked in. Do not gate behaviour on environment variables.
+# Secrets: copy secrets.example.yaml → secrets.yaml (gitignored).
+
+paths:
+  repo_root: "."
+  duckdb_path: "data/synthetic/generated/ir01.duckdb"
+  semantic_yaml: "config/semantic.yaml"
+  policy_yaml: "config/policy.yaml"
+  questions_dir: "eval/questions"
+  invariants_catalog: "tests/invariants/catalog.yaml"
+  documents_dir: "data/documents"
+  goldens_dir: "eval/goldens"
+
+duckdb:
+  read_only: true
+
+llm:
+  # Model name only; API key lives in config/secrets.yaml
+  provider: "openai_compatible"
+  model: "gpt-4o-mini"
+  base_url: null
+  temperature: 0
+
+routing:
+  # Prefer named metrics / golden runner over free-form LLM for deterministic questions
+  deterministic_first: true
+  use_llm_for_deterministic: false
+
+runtime:
+  single_turn: true
+  property_id: "IR01"
+  currency: "USD"
