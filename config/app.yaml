@@ -43,3 +43,12 @@ api:
   host: "0.0.0.0"
   port: 8080
 
+# Local Explore UI (I8) — push-down aggregates; no env-var toggles.
+explore:
+  preview_rows: 100
+  aggregate_result_cap: 50
+  value_counts_top_k: 20
+  default_sample_rows: 10000
+  # When false, large tables use SAMPLE unless caller sets full_scan=true
+  allow_full_scan: true
+
