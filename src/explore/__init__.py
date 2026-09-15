@@ -3,6 +3,7 @@
 from explore.service import (
     ExploreError,
     aggregate,
+    count_rows,
     list_tables,
     preview,
     summarize,
@@ -12,6 +13,7 @@ from explore.service import (
 __all__ = [
     "ExploreError",
     "aggregate",
+    "count_rows",
     "list_tables",
     "preview",
     "summarize",

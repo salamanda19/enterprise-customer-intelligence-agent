@@ -1,15 +1,20 @@
-"""I8 explore service tests (whitelist, caps, summarize ≠ limited-mean)."""
+"""I8 explore service tests (whitelist, caps, summarize != limited-mean)."""
 
 from __future__ import annotations
-
-from pathlib import Path
 
 import duckdb
 import pytest
 
 from ecia.config_loader import load_app_config
 from ecia.data.generate import DEFAULT_DB_PATH
-from explore.service import ExploreError, aggregate, preview, summarize
+from explore.service import (
+    ExploreError,
+    _scan_relation,
+    aggregate,
+    count_rows,
+    preview,
+    summarize,
+)
 from tools.sql.readonly import run_sql
 
 pytestmark = pytest.mark.skipif(
@@ -40,11 +45,58 @@ def test_preview_capped() -> None:
     assert res.ok
     assert res.data is not None
     assert len(res.data["rows"]) <= 5
+    assert res.data["offset"] == 0
+
+
+def test_preview_sample_rejects_offset() -> None:
+    with pytest.raises(ExploreError, match="offset is not supported"):
+        preview("members", limit=5, offset=10, sample=True)
+
+
+def test_preview_sample_omits_offset() -> None:
+    res = preview("members", limit=5, sample=True)
+    assert res.ok
+    assert res.data is not None
+    assert res.data["sample"] is True
+    assert res.data["offset"] is None
+
+
+def test_count_rows() -> None:
+    res = count_rows("members")
+    assert res.ok and res.data
+    assert res.data["row_count"] >= 1
+    assert res.sql == ["SELECT COUNT(*) FROM members"]
 
 
 def test_aggregate_rejects_write_shaped_table() -> None:
     with pytest.raises(ExploreError, match="not allowed"):
         aggregate("secret_table", group_by=["a"], metrics=[{"fn": "count"}])
+
+
+def test_scan_relation_auto_samples_large_when_disallow_full() -> None:
+    cfg = {"default_sample_rows": 10_000, "allow_full_scan": False}
+    rel, meta = _scan_relation(
+        "members",
+        row_count=60_000,
+        full_scan=None,
+        sample_rows=10_000,
+        cfg=cfg,
+    )
+    assert meta["scan_mode"] == "sample"
+    assert "_sample" in rel
+
+
+def test_scan_relation_auto_full_when_allow_full() -> None:
+    cfg = {"default_sample_rows": 10_000, "allow_full_scan": True}
+    rel, meta = _scan_relation(
+        "members",
+        row_count=60_000,
+        full_scan=None,
+        sample_rows=10_000,
+        cfg=cfg,
+    )
+    assert meta["scan_mode"] == "full"
+    assert rel == "members"
 
 
 def test_summarize_mean_matches_full_avg_not_limited_slice() -> None:
@@ -66,7 +118,6 @@ def test_summarize_mean_matches_full_avg_not_limited_slice() -> None:
     if n <= 5:
         pytest.skip("not enough rows to distinguish LIMIT-then-mean")
 
-    # If the limited slice happens to match full avg, skip (rare)
     if limited_avg is not None and full_avg is not None and abs(limited_avg - full_avg) < 1e-9:
         pytest.skip("LIMIT-5 mean coincides with full mean")
 
@@ -81,11 +132,19 @@ def test_summarize_mean_matches_full_avg_not_limited_slice() -> None:
         None,
     )
     assert amount_row is not None
-    # DuckDB SUMMARIZE uses 'avg' key
     engine_avg = amount_row.get("avg")
     assert engine_avg is not None
     assert abs(float(engine_avg) - float(full_avg)) < 1e-6
     assert abs(float(engine_avg) - float(limited_avg)) > 1e-9
+
+
+def test_summarize_skips_numeric_fk_value_counts() -> None:
+    """Low-cardinality integer columns must not get categorical top-K."""
+    res = summarize("members", full_scan=True)
+    assert res.ok and res.data
+    vc = res.data.get("value_counts") or {}
+    for key in vc:
+        assert key.lower() not in {"member_id", "id"}
 
 
 def test_aggregate_group_by_tier() -> None:

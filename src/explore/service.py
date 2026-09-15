@@ -6,6 +6,7 @@ belong to preview and free-form run_sql only.
 
 from __future__ import annotations
 
+import math
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -131,10 +132,16 @@ def _scan_relation(
     sample_rows: int | None,
     cfg: dict[str, Any],
 ) -> tuple[str, dict[str, Any]]:
-    """Return (FROM-clause fragment, scan meta). Never wraps aggregates in LIMIT."""
+    """Return (FROM-clause fragment, scan meta). Never wraps aggregates in LIMIT.
+
+    ``sample_rows`` only caps TABLESAMPLE size; it never raises the full-scan
+    threshold above ``_SMALL_TABLE_ROWS``.
+    """
     default_sample = int(cfg.get("default_sample_rows") or 10_000)
     allow_full = bool(cfg.get("allow_full_scan", True))
     n = sample_rows if sample_rows is not None else default_sample
+    if n < 1:
+        raise ExploreError("sample_rows must be >= 1")
 
     use_full: bool
     if full_scan is True:
@@ -144,23 +151,45 @@ def _scan_relation(
     elif full_scan is False:
         use_full = False
     else:
-        # Auto: small tables full scan; larger tables sample unless allow_full and under threshold
-        use_full = row_count <= max(n, _SMALL_TABLE_ROWS) or (
-            allow_full and row_count <= _SMALL_TABLE_ROWS
-        )
+        # Auto: always full for small tables; large tables full only when allow_full
+        use_full = row_count <= _SMALL_TABLE_ROWS or allow_full
 
+    # Table fits in the sample budget → full scan is cheaper and exact
     if use_full or row_count <= n:
         return table, {"scan_mode": "full", "row_count": row_count, "sample_rows": None}
 
-    # DuckDB TABLESAMPLE SYSTEM (percentage)
-    pct = max(0.01, min(100.0, 100.0 * n / max(row_count, 1)))
-    rel = f"(SELECT * FROM {table} TABLESAMPLE SYSTEM ({pct})) AS _sample"
+    # DuckDB percentage sample (SYSTEM requires an integer percent with '%')
+    pct = max(1, min(100, int(math.ceil(100.0 * n / max(row_count, 1)))))
+    rel = f"(SELECT * FROM {table} TABLESAMPLE SYSTEM ({pct}%)) AS _sample"
     return rel, {
         "scan_mode": "sample",
         "row_count": row_count,
         "sample_rows": n,
-        "sample_pct": pct,
+        "sample_pct": float(pct),
     }
+
+
+def count_rows(table: str, *, db_path: Path | None = None) -> ExploreResult:
+    """Return exact COUNT(*) for an allowlisted table (no detail download)."""
+    t = _require_table(table)
+    path = _db_path(db_path)
+    sql = f"SELECT COUNT(*) FROM {t}"
+    try:
+        con = _connect(path)
+    except ExploreError as exc:
+        return ExploreResult(ok=False, error=str(exc), sql=[sql])
+
+    try:
+        n = _row_count(con, t)
+        return ExploreResult(
+            ok=True,
+            data={"table": t, "row_count": n},
+            sql=[sql],
+        )
+    except Exception as exc:  # noqa: BLE001
+        return ExploreResult(ok=False, error=str(exc), sql=[sql])
+    finally:
+        con.close()
 
 
 def preview(
@@ -179,6 +208,8 @@ def preview(
         raise ExploreError("preview limit must be 1..1000")
     if offset < 0:
         raise ExploreError("offset must be >= 0")
+    if sample and offset != 0:
+        raise ExploreError("offset is not supported with sample=True")
 
     path = _db_path(db_path)
     sqls: list[str] = []
@@ -191,11 +222,8 @@ def preview(
         n = _row_count(con, t)
         sqls.append(f"SELECT COUNT(*) FROM {t}")
         if sample and n > 0:
-            pct = max(0.01, min(100.0, 100.0 * cap / n))
-            sql = (
-                f"SELECT * FROM {t} TABLESAMPLE SYSTEM ({pct}) "
-                f"LIMIT {cap}"
-            )
+            # Reservoir gives an exact row budget; SYSTEM(float) is invalid in DuckDB
+            sql = f"SELECT * FROM {t} USING SAMPLE reservoir({cap} ROWS)"
         else:
             sql = f"SELECT * FROM {t} LIMIT {cap} OFFSET {offset}"
         sqls.append(sql)
@@ -213,7 +241,8 @@ def preview(
                 "table": t,
                 "row_count": n,
                 "preview_rows": len(rows),
-                "offset": offset,
+                # offset is meaningless under TABLESAMPLE; omit rather than lie
+                "offset": None if sample else offset,
                 "sample": sample,
                 "columns": keep,
                 "rows": rows,
@@ -292,8 +321,12 @@ def summarize(
                 approx_unique = int(approx_unique)
             except (TypeError, ValueError):
                 approx_unique = 0
-            is_cat = any(x in ctype for x in ("varchar", "text", "enum", "bool")) or (
-                approx_unique > 0 and approx_unique <= max(top_k * 5, 50)
+            # Only string/bool-ish types — avoid low-cardinality numeric FKs
+            is_bool = "bool" in ctype
+            is_stringish = any(x in ctype for x in ("varchar", "text", "enum"))
+            max_unique = max(top_k * 5, 50)
+            is_cat = is_bool or (
+                is_stringish and (approx_unique == 0 or approx_unique <= max_unique)
             )
             if not is_cat:
                 continue

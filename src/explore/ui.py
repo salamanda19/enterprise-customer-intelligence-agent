@@ -22,6 +22,7 @@ from ecia.config_loader import REPO_ROOT, load_app_config, load_yaml
 from explore.service import (
     ExploreError,
     aggregate,
+    count_rows,
     list_tables,
     preview,
     summarize,
@@ -90,11 +91,11 @@ def _explore_tab() -> None:
     c1, c2, c3 = st.columns(3)
     with c1:
         if st.button("COUNT(*)"):
-            prev = preview(table, limit=1)
-            if prev.ok and prev.data:
-                st.metric("Row count", prev.data["row_count"])
+            counted = count_rows(table)
+            if counted.ok and counted.data:
+                st.metric("Row count", counted.data["row_count"])
             else:
-                st.error(prev.error or "COUNT failed")
+                st.error(counted.error or "COUNT failed")
     with c2:
         preview_n = st.number_input(
             "Preview rows",
@@ -136,16 +137,17 @@ def _explore_tab() -> None:
     metric_col = None
     if metric_fn != "count":
         metric_col = st.selectbox("Metric column", col_names)
-    if st.button("Aggregate") and dims:
-        metrics = [{"fn": metric_fn, "column": metric_col or "*"}]
-        res = aggregate(table, group_by=dims, metrics=metrics, full_scan=True)
-        if not res.ok:
-            st.error(res.error)
+    if st.button("Aggregate", key="run_aggregate"):
+        if not dims:
+            st.error("Select 1–2 group-by columns")
         else:
-            st.caption(f"Scan: {res.data.get('scan')} · cap={res.data.get('result_cap')}")
-            st.dataframe(res.data["rows"], use_container_width=True)
-    elif st.button("Aggregate") and not dims:
-        st.error("Select 1–2 group-by columns")
+            metrics = [{"fn": metric_fn, "column": metric_col or "*"}]
+            res = aggregate(table, group_by=dims, metrics=metrics, full_scan=True)
+            if not res.ok:
+                st.error(res.error)
+            else:
+                st.caption(f"Scan: {res.data.get('scan')} · cap={res.data.get('result_cap')}")
+                st.dataframe(res.data["rows"], use_container_width=True)
 
 
 def _sql_tab() -> None:
