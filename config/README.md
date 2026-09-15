@@ -4,7 +4,7 @@ Runtime behaviour is consolidated in YAML under this directory (not environment-
 
 | File | Role |
 |------|------|
-| `app.yaml` | Paths, DuckDB, model name, routing |
+| `app.yaml` | Paths, DuckDB, model name, routing, explore UI caps |
 | `semantic.yaml` | SSOT projection: entities, defaults, tiers, metrics |
 | `policy.yaml` | Modes, reason codes, conflict rule, out-of-scope cues |
 | `secrets.example.yaml` | Template for API keys |

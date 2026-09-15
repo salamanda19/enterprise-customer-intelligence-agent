@@ -27,8 +27,8 @@
 **I4／V1：** WP-401–407 完成（CLI 代理、pre-flight、SQL 護欄、確定性路由；預設不呼叫 LLM）。  
 **I5：** WP-501–507 完成（Q2／Q11／Q12／Q15 指標；Q1–Q15＋RevPAR 全題金標；figures 驗證器；無金標拒跑代理評測）。  
 **I6：** WP-601–606 完成（代理評測器、offline naive baseline、58 變體金標、延遲摘要、失敗分析與生成性目標回填）。  
-**I7／V3：** WP-701–707 完成（FastAPI、Docker Compose、CI、meta 延遲欄位、架構圖、writeup、Q5／Q7 示範）。下一刀可選 **I8（WP-801+）**。  
-**I8（本機 Explore UI）：** 可在 I4 後並行；**不擋** I6／I7。尚未開工。
+**I7／V3：** WP-701–707 完成（FastAPI、Docker Compose、CI、meta 延遲欄位、架構圖、writeup、Q5／Q7 示範）。  
+**I8（本機 Explore UI）：** WP-801–807 完成（`explore` YAML、preview／summarize／aggregate push-down、Streamlit Ask／Explore／SQL、輕量測）。不擋 V2／V3。
 
 ---
 
@@ -237,5 +237,6 @@ W6     I7  包裝與示範
 
 ## 7. 現在下一步
 
-開始可選 **WP-801**（本機 Explore UI），或停在此處整理 PR。  
-I7 重現：`python -m api.server`、`python scripts/demo.py`、`docker compose -f deploy/docker-compose.yml up --build`。
+工作計畫 I1–I8 任務已完成。可整理 PR，或另開 SSOT／實作計畫未列的實驗。  
+
+重現：`python -m api.server`、`python scripts/demo.py`、`docker compose -f deploy/docker-compose.yml up --build`、`streamlit run src/explore/ui.py`。

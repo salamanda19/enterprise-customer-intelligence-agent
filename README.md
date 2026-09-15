@@ -6,7 +6,7 @@ Numbers and definitions come from a semantic layer, deterministic SQL/analytics,
 
 ## Status
 
-**I1–I7 complete** (V1 CLI → V2 eval → V3 packaging). Optional **I8** (Streamlit Explore) is separate and does not block V2/V3.
+**I1–I8 complete** (V1 CLI → V2 eval → V3 packaging → optional local Explore UI).
 
 - [`docs/ssot.md`](docs/ssot.md) — product SSOT  
 - [`docs/implementation_plan.md`](docs/implementation_plan.md) — architecture & phases  
@@ -29,7 +29,7 @@ User question → Pre-flight policy
 ```bash
 python -m venv .venv
 # Windows: .venv\Scripts\activate
-pip install -e ".[dev,api]"
+pip install -e ".[dev,api,explore]"
 python scripts/rebuild_db.py      # once / when schema changes
 python scripts/build_goldens.py
 pytest
@@ -63,11 +63,22 @@ docker compose -f deploy/docker-compose.yml up --build
 
 See [`deploy/README.md`](deploy/README.md).
 
+## Local Explore UI (I8)
+
+Thin Streamlit surface over the same `handle()` / explore service / `run_sql()` — not a product UI.
+
+```bash
+pip install -e ".[explore]"
+streamlit run src/explore/ui.py
+```
+
+Tabs: **Ask** (structured agent response), **Explore** (preview / `SUMMARIZE` / group-by; push-down), **SQL** (read-only, row-capped). Behaviour constants: `config/app.yaml` → `explore`.
+
 ## Repository layout
 
 | Path | Purpose |
 |------|---------|
-| `src/` | `agent`, `policy`, `tools`, `validation`, `ecia`, `api`, `agent_eval` |
+| `src/` | `agent`, `policy`, `tools`, `validation`, `ecia`, `api`, `agent_eval`, `explore` |
 | `config/` | Behaviour YAML (secrets gitignored) |
 | `data/` | Documents + synthetic generator (DB gitignored) |
 | `eval/` | Contracts, goldens, result summaries |
