@@ -1,0 +1,195 @@
+{
+  "generated_at": "2026-09-15T08:00:11.758139+00:00",
+  "goldens_path": "C:\\Users\\User\\Desktop\\enterprise-customer-intelligence-agent\\eval\\goldens\\q1_q15_goldens.json",
+  "summary": {
+    "system": "deterministic_agent",
+    "n_q1_q15": 15,
+    "n_total": 17,
+    "pass_all_behavioural": true,
+    "mode_match_rate": 1.0,
+    "reason_match_rate": 1.0,
+    "figures_match_rate": 1.0,
+    "prohibited_claim_failures": 0,
+    "latency_ms_median": 139.1,
+    "latency_ms_p95": 279.69,
+    "gates": {
+      "mode_reason_100": true,
+      "prohibited_claims_0": true,
+      "figures_100": true
+    },
+    "failures": [],
+    "q8_conflict_ok": true
+  },
+  "scores": [
+    {
+      "question_id": "Q1",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 174.01,
+      "errors": []
+    },
+    {
+      "question_id": "Q2",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 111.31,
+      "errors": []
+    },
+    {
+      "question_id": "Q3",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 115.37,
+      "errors": []
+    },
+    {
+      "question_id": "Q4",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 113.23,
+      "errors": []
+    },
+    {
+      "question_id": "Q5",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 144.84,
+      "errors": []
+    },
+    {
+      "question_id": "Q6",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 12.92,
+      "errors": []
+    },
+    {
+      "question_id": "Q7",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 10.11,
+      "errors": []
+    },
+    {
+      "question_id": "Q8",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 139.1,
+      "errors": []
+    },
+    {
+      "question_id": "Q9",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 86.83,
+      "errors": []
+    },
+    {
+      "question_id": "Q10",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 162.39,
+      "errors": []
+    },
+    {
+      "question_id": "Q11",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 291.4,
+      "errors": []
+    },
+    {
+      "question_id": "Q12",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 222.29,
+      "errors": []
+    },
+    {
+      "question_id": "Q13",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 15.08,
+      "errors": []
+    },
+    {
+      "question_id": "Q14",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 209.79,
+      "errors": []
+    },
+    {
+      "question_id": "Q15",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 279.69,
+      "errors": []
+    },
+    {
+      "question_id": "Q_REVPAR",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 36.54,
+      "errors": []
+    },
+    {
+      "question_id": "Q8_CONFLICT",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 257.12,
+      "errors": []
+    }
+  ]
+}

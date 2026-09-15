@@ -38,7 +38,7 @@
 | 分析庫 | DuckDB 檔案庫，唯讀查詢 | 夠用、可重現、不是 EDW |
 | 語意／政策 | 檢入的 YAML（定義、常數、原因碼、outlet 政策） | SSOT 的機器可讀投影 |
 | 編排 | 單一 tool-calling 迴圈，薄封裝 | 避免框架變成產品 |
-| 介面 | V1–V2 以 CLI 為準；V3 再加 HTTP | 示範看系統行為，不看 UI |
+| 介面 | V1–V2 以 CLI 為準；V3 再加 HTTP。**本機薄 Explore UI**（Streamlit）可在 CLI 可跑後另開，不取代 CLI／API | 示範仍看系統行為；UI 是檢視與探索面，不是產品 |
 | 檢索 | V1：核准文件分塊 + 關鍵詞／向量擇一簡單方案；V2 再評是否值得上向量 | 無衝突時定義以語意層為準；衝突則拒絕選邊 |
 | LLM | OpenAI 相容 API，模型名寫在 config | 可換供應商；簡單題可走低成本路徑 |
 | 測試 | pytest：資料不變量、指標金標、代理輸出契約 | 與原因碼對得上 |
@@ -51,7 +51,7 @@
 | 高價值門檻數字 | 資料凍結後鎖定 | SSOT D38 |
 | VIP 衝突文 | **必產**一篇，測 `DEFINITION_CONFLICT` | 覆蓋 Q8 衝突路徑，不留未測原因碼 |
 
-不選：K8s、微服務、生產 IAM、多代理、華麗前端、租戶 POS 模擬。
+不選：K8s、微服務、生產 IAM、多代理、精緻產品前端、租戶 POS 模擬。本機 Streamlit（Ask／Explore／SQL）不算精緻產品 UI。
 
 ---
 
@@ -106,6 +106,8 @@ User question → Pre-flight policy ┼── (scope, PII, causal,
 | `validation/` | SQL 護欄、數字重算、主張對證據、不變量、模式／原因碼 | 不「用另一個 LLM 感覺對不對」當唯一關卡 |
 | `eval/` | Q1–Q15 契約 → golden runner → 代理 vs naive-LLM baseline | 不預先寫死金額；行為門檻見 §10 |
 | `api/` | V3 才出現 | V1 不需要 |
+| `explore/`（或同等薄層） | 本機探索：`preview`／`summarize`／`aggregate` 參數化 SQL；Kaggle Data Explorer 式欄位摘要 | 不是 BI 產品；不算數權威；不把全表載入記憶體當預設路徑 |
+| 本機 UI（Streamlit） | 三 Tab：Ask（`handle`）、Explore（上述 API）、SQL（`run_sql`） | 不另開 DuckDB-WASM；不開頁 rebuild；不預設全庫 profiling |
 
 **數字路徑：** 實稱數字主張**預設**走命名指標；自由 SQL 可作探索／交叉核對。獨立重算不得等於「重跑模型剛寫的同一條 SQL」。
 
@@ -129,6 +131,35 @@ Planner 與 agent 可為同一迴圈裡的路由步驟（簡單確定性題走�
 
 - **無衝突：** 語意層為準，核准文件可附引用。
 - **核准來源互斥：** 不得選邊；`DEFINITION_CONFLICT` + `refuse`，直到 SSOT 更新。
+
+### 3.3 本機 Explore UI（實現選擇，非 SSOT 產品介面）
+
+目的：本機用瀏覽器問代理、看庫、做**資料彙總**（mean／count／sum 等），並跑簡單唯讀 SQL。對齊 Kaggle **Data Explorer** 的體驗（預覽 + **欄位級 metrics**），不是縮寫 glossary。
+
+**原則：** 統計與彙總在 DuckDB **push-down**；UI 只收小結果。資料變大時，記憶體應隨**結果大小**成長，不隨全表線性成長。
+
+```text
+Streamlit（Ask | Explore | SQL）
+        │
+        ├─ Ask  → agent.handle（既有契約）
+        ├─ SQL  → tools/sql.run_sql（明細 row cap）
+        └─ Explore → explore service
+                      preview | summarize | aggregate
+                      ↓
+                   DuckDB 唯讀（白名單）
+```
+
+| API | 用途 | Cap 語意 |
+|---|---|---|
+| `preview` | 明細／分頁／可選 sample | `preview_row_cap`（例如 100）；禁止預設全表下載 |
+| `summarize` | 表／欄位摘要（型別、null%、unique、min／max／mean／std、分位數；類別 top-K） | 結果小；優先引擎 `SUMMARIZE` 或等效聚合；**不得**先 `LIMIT` 原始列再算 mean |
+| `aggregate` | 1–2 維度 + count／sum／avg／min／max | 可全表掃描；回傳 `aggregate_result_cap`（top-N） |
+
+與 `run_sql` 共用：唯讀連線、表／欄白名單、禁寫入。分開：自由 SQL 的明細 cap **不可**套在彙總掃描上。行為常數寫入 `config/app.yaml`（`explore.preview_rows`、`aggregate_result_cap`、`value_counts_top_k`、`default_sample_rows`、`allow_full_scan`）。小表可自動 full scan；大表預設 sample，full scan 須明示。
+
+刻意不做：開頁整表 `.df()`、預設 ydata-profiling／PyGWalker（若日後加，只吃樣本或已聚合小結果）、第二條 WASM 查詢路徑、寫入 SQL、精緻 BI。
+
+此面不擋 V2 評測、不取代 V3 HTTP；CLI 仍是行為準據。
 
 ---
 
@@ -196,6 +227,8 @@ SSOT
   → V3 包裝、文件、示範
 ```
 
+本機 Explore UI（工作流 H）可在 CLI 可跑（M4）後並行，不插入上述評測關鍵路徑。
+
 | 工作流 | 內容 | 主要 SSOT 對應 |
 |---|---|---|
 | A. 語意與政策 | YAML：實體、預設解釋、指標、原因碼、覆蓋 catalog | §7–11、D27–D30 |
@@ -205,8 +238,9 @@ SSOT
 | E. 驗證 | 護欄、數字核對、模式／原因碼、PII | §10–13 |
 | F. 評測 | Q1–Q15 → 變體擴題；golden + naive-LLM 對照 | §15–16、提案 §11–13 |
 | G. 包裝 | API、Docker、CI、成本／延遲、writeup、示範 | 提案 V3 |
+| H. 本機探索面 | Streamlit + explore service（preview／summarize／aggregate）；Ask 接既有代理 | 非 SSOT；見 §3.3 |
 
-C 必須在 D 的正式評測之前可跑。D 的 V1 只為證明端到端，不是評測終點。
+C 必須在 D 的正式評測之前可跑。D 的 V1 只為證明端到端，不是評測終點。H 可在 M4 之後開始，**不得**擋 M5 評測。
 
 ---
 
@@ -226,7 +260,7 @@ C 必須在 D 的正式評測之前可跑。D 的 V1 只為證明端到端，不
 - 單一代理 CLI：能跑上述確定性題 + **Q5 降級（含可觀察子集數字與缺口聲明）** + 一題拒絕（Q7 或 Q6）
 - 唯讀 SQL 護欄（禁寫入）；pre-flight 擋 PII／因果／GMV 插補
 
-刻意不做：50–100 題、完整數字驗證器、Docker、API、多代理、向量庫打磨。
+刻意不做：50–100 題、完整數字驗證器、Docker、API、多代理、向量庫打磨、本機 Explore UI（可於 M4 後另開，見 §3.3／工作流 H）。
 
 **完成定義：** 同一指令可重建資料並跑通 V1 題；輸出含 `response_mode`、原因碼與（有數字時）`figures[]`；Q5 為真降級而非空拒絕；Q6／Q7 不出現因果或插補數字。
 
@@ -267,8 +301,9 @@ C 必須在 D 的正式評測之前可跑。D 的 V1 只為證明端到端，不
 - CI：不變量 + 金標 + 抽樣代理測（成本可控）
 - 延遲／token 成本紀錄（含 model 名與 prompt 版本）
 - 架構圖、評測摘要、1,500–2,000 字 writeup、2–5 分鐘示範（Q5 降級或 Q7 拒絕為必演）
+- **可選：** 本機 Streamlit Explore（§3.3）；不列入 V3 完成必要條件
 
-仍不做：K8s、IAM、精緻 UI。
+仍不做：K8s、IAM、精緻產品 UI（本機薄 Explore 除外，見 §2）。
 
 ---
 
@@ -283,6 +318,7 @@ C 必須在 D 的正式評測之前可跑。D 的 V1 只為證明端到端，不
 | M4 | CLI 代理端到端含真降級與拒絕；pre-flight 生效 |
 | M5 | Q1–Q15 + naive-LLM 對照 + 失敗分析 |
 | M6 | API／Docker／CI／writeup／示範 |
+| M4+／H | 本機 Explore UI（可選；不擋 M5） |
 
 M3 未完成不做正式「代理準確率」結論。
 
@@ -311,6 +347,8 @@ M3 未完成不做正式「代理準確率」結論。
 | 50–100 題時間盒過滿 | 變體模板 | 模板化 + runner 金標；可退讓並寫明 |
 | 把租戶 GMV 做成權限問題 | D29 | 政策只發 `DATA_UNAVAILABLE`／`COVERAGE_GAP` |
 | 過期 scaffold 誤導實作 | 本文件 §4 | 實作前更新：`data/README.md`、`src/README.md`（去 `booking_revenue`）、根 `README.md`（語意在 V1）、`tests/README.md`、`eval/README.md` |
+| Explore 用 pandas 全表載入或「先 LIMIT 再 mean」 | §3.3 | 彙總走引擎端；明細 cap 與彙總 result cap 分開 |
+| 把本機 UI 當成正式產品面／擋評測 | 工作流 H | 不擋 M5；CLI／契約仍是準據 |
 
 ---
 
@@ -332,12 +370,12 @@ M3 未完成不做正式「代理準確率」結論。
 
 ### 釋出
 
-沒有對真實 IR 上線。釋出＝可重現產物：鎖定資料種子、config、**prompt 版本**、評測摘要、容器。示範走真實 CLI／API，不配旁白造假數字。
+沒有對真實 IR 上線。釋出＝可重現產物：鎖定資料種子、config、**prompt 版本**、評測摘要、容器。示範走真實 CLI／API（可另開本機 Streamlit），不配旁白造假數字。
 
 ### 治理
 
 - 改定義、範圍、原因碼：先改 SSOT 決策紀錄，再改 YAML。
-- 改表、工具、模型：只改本層與工作計畫，不准倒寫 SSOT。
+- 改表、工具、模型、本機 Explore UI：只改本層與工作計畫，不准倒寫 SSOT。
 - 發現 7–8 節與 I1–I21 不一致：改不變量表去對齊 7–8 節，或先改 SSOT 再改表。
 - 本層已定案對齊 SSOT D34–D38；其餘開放題僅剩 §18 高價值門檻數字與金標。定案時先改 SSOT，再改 YAML／產生器。
 
@@ -351,9 +389,10 @@ M3 未完成不做正式「代理準確率」結論。
 - 多代理實驗（僅當 V2 失敗分析證明單代理編排是瓶頸）
 - 多主張圖（`claims[]`）；本版頂層單一 `response_mode` 即可
 - 澄清對話模式；本版單輪 + 預設聲明
+- 精緻產品前端、瀏覽器內 OLAP、開頁全表 profiling
 
 ---
 
 ## 12. 下一層
 
-工作計畫見 [`work_plan.md`](work_plan.md)。第一個有意義的程式產出是：**語意投影 + 可重建的合成庫 + golden runner。**
+工作計畫見 [`work_plan.md`](work_plan.md)。評測關鍵路徑仍是 I6；本機 Explore 任務為 **I8**。

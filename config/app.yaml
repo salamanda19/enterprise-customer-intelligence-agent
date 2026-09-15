@@ -21,6 +21,14 @@ llm:
   base_url: null
   temperature: 0
 
+eval:
+  # Recorded in eval summaries (WP-602 / WP-604)
+  agent_prompt_version: "deterministic-router-v1"
+  naive_prompt_version: "naive-offline-v1"
+  # Flaky handling for optional LLM naive path: temperature 0; N=1 offline
+  llm_repeat_n: 1
+  seed: 0
+
 routing:
   # Prefer named metrics / golden runner over free-form LLM for deterministic questions
   deterministic_first: true
@@ -30,3 +38,8 @@ runtime:
   single_turn: true
   property_id: "IR01"
   currency: "USD"
+
+api:
+  host: "0.0.0.0"
+  port: 8080
+

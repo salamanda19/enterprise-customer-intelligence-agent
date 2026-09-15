@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
+from agent.meta import attach_meta  # noqa: E402
 from agent.orchestrator import handle  # noqa: E402
 
 
@@ -36,14 +37,18 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         question = by_id[args.question_id]["prompt"]
 
-    result = handle(question, question_id=args.question_id)
+    import time
+
+    t0 = time.perf_counter()
+    result = attach_meta(handle(question, question_id=args.question_id), latency_ms=(time.perf_counter() - t0) * 1000)
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
         print(result["answer_text"])
         print(
             f"[{result['response_mode']}] reason_codes={result.get('reason_codes')} "
-            f"figures={len(result.get('figures') or [])}"
+            f"figures={len(result.get('figures') or [])} "
+            f"latency_ms={result.get('meta', {}).get('latency_ms')}"
         )
     return 0
 
