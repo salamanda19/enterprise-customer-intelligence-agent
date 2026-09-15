@@ -25,7 +25,10 @@
 **I2：** WP-201–206 完成。  
 **I3：** WP-301–305 完成。  
 **I4／V1：** WP-401–407 完成（CLI 代理、pre-flight、SQL 護欄、確定性路由；預設不呼叫 LLM）。  
-**I5：** WP-501–507 完成（Q2／Q11／Q12／Q15 指標；Q1–Q15＋RevPAR 全題金標；figures 驗證器；無金標拒跑代理評測）。下一刀 **I6（WP-601+）**。
+**I5：** WP-501–507 完成（Q2／Q11／Q12／Q15 指標；Q1–Q15＋RevPAR 全題金標；figures 驗證器；無金標拒跑代理評測）。  
+**I6：** WP-601–606 完成（代理評測器、offline naive baseline、58 變體金標、延遲摘要、失敗分析與生成性目標回填）。  
+**I7／V3：** WP-701–707 完成（FastAPI、Docker Compose、CI、meta 延遲欄位、架構圖、writeup、Q5／Q7 示範）。下一刀可選 **I8（WP-801+）**。  
+**I8（本機 Explore UI）：** 可在 I4 後並行；**不擋** I6／I7。尚未開工。
 
 ---
 
@@ -42,8 +45,9 @@
 | I5 | M5a | V2 前段 | 其餘指標、Q1–Q15 金標、驗證器 |
 | I6 | M5b | V2 完成 | 代理評測 vs naive-LLM、失敗分析、題庫擴充 |
 | I7 | M6 | V3 | API、Docker、CI、writeup、示範 |
+| I8 | M4+／H | 可選；不擋 V2 | 本機 Streamlit：Ask／Explore／SQL；引擎端彙總 |
 
-依賴鏈：**I1 → I2 → I3 → I4**。I5 可與 I4 尾部重疊（指標可先寫、代理後接），但 **I6 不得在 I5／Q1–Q15 全題金標齊備前開始正式評測**（僅有 I3 的 V1 子集金標不夠）。I7 不得在 I6 失敗分析前當「專案完成」。
+依賴鏈：**I1 → I2 → I3 → I4**。I5 可與 I4 尾部重疊（指標可先寫、代理後接），但 **I6 不得在 I5／Q1–Q15 全題金標齊備前開始正式評測**（僅有 I3 的 V1 子集金標不夠）。I7 不得在 I6 失敗分析前當「專案完成」。**I8 依賴 I4**（`handle`、`run_sql`、凍結庫），可與 I5–I7 並行，完成與否不影響 V2 行為門檻。
 
 第一個有意義的程式產出是 I1–I3，**不是聊天迴圈**。
 
@@ -157,13 +161,31 @@
 | WP-706 | 1,500–2,000 字 writeup | I6、WP-705 | 問題、語意、驗證、拒絕、取捨、失敗 |
 | WP-707 | 2–5 分鐘示範腳本：必演 Q5 或 Q7 | WP-701 或 CLI | 真輸出，不旁白造數字 |
 
-**I7／V3 完成：** 實作計畫 6.3。仍無 K8s、IAM、精緻 UI。
+**I7／V3 完成：** 實作計畫 6.3。仍無 K8s、IAM、精緻產品 UI（本機薄 Explore 見 I8）。
+
+---
+
+### I8 — 本機 Explore UI（M4+／工作流 H）P2
+
+對齊實作計畫 §3.3。不新增業務範圍；不取代 CLI／HTTP。
+
+| ID | 任務 | 依賴 | DoD |
+|---|---|---|---|
+| WP-801 | `config/app.yaml` 增加 `explore`：preview_rows、aggregate_result_cap、value_counts_top_k、default_sample_rows、allow_full_scan | WP-102、I4 | 行為只從 YAML 讀；無環境變數開關 |
+| WP-802 | Explore service：`preview`／`summarize`／`aggregate`；表／欄白名單；唯讀 DuckDB；彙總**不得**先截斷明細再算 mean | WP-401、WP-801 | 三 API 可單測；白名單外表／寫入失敗 |
+| WP-803 | 欄位摘要：優先引擎 `SUMMARIZE`（或等效）；類別 top-K 用 `GROUP BY … LIMIT K` | WP-802 | 結果列數小；小表可 full scan、大表可 sample |
+| WP-804 | Streamlit：Ask Tab 呼叫既有 `handle()` | WP-405、WP-801 | 能跑題號／自由文字；顯示 mode、原因碼、`figures` |
+| WP-805 | Explore Tab：選表、COUNT(*)、preview、column metrics、1–2 維 group-by builder | WP-802、WP-803 | 預設不 `.df()` 全表；不開頁 rebuild／profiling |
+| WP-806 | SQL Tab：接 `run_sql()` | WP-401 | 寫入被拒；明細仍受 row cap |
+| WP-807 | README 啟動步驟；可選輕量測（白名單、cap、summarize ≠ limited-mean） | WP-804–806 | `streamlit run …` 有文件；測試不拉 UI e2e |
+
+**I8 完成：** 三 Tab 可本機使用；Explore 走 push-down；與實作計畫 §3.3 刻意不做清單一致。不做 PyGWalker／ydata-profiling 預設、不做 WASM 第二路徑。
 
 ---
 
 ## 4. 優先級與建議週序
 
-在 V1 時間盒內 strictly：I1 → I2 → I3 → I4。抽時間只准往前趕指標（WP-501 類），不准先做 API 或多代理。
+在 V1 時間盒內 strictly：I1 → I2 → I3 → I4。抽時間只准往前趕指標（WP-501 類），不准先做 API 或多代理。I8 不進 V1 關鍵路徑；I4 完成後可穿插，但不得擠掉 I6。
 
 ```text
 週序（示意，可壓縮）
@@ -173,6 +195,7 @@ W2     I3  runner／金標（含 Q5）
 W2–W3  I4  政策／SQL／CLI／V1 測
 W4–W5  I5–I6  全題、naive-LLM、失敗分析
 W6     I7  包裝與示範
+       I8  可與 W4–W6 並行（不擋 I6）
 ```
 
 並行限制：產生器未綠燈前不寫「自由 SQL 探索用」寬表。金標未產出前不擴大 LLM 評測。
@@ -194,6 +217,8 @@ W6     I7  包裝與示範
 | 放寬行為門檻 | I6 | WP-606 只回填生成性指標 |
 | `ACCESS_RESTRICTED` 被加回來 | I4 | WP-402 測試禁止該碼 |
 | 過期 scaffold 誤導 | I1 | WP-107 與 schema 同一迭代 |
+| Explore 全表進記憶體／先 LIMIT 再平均 | I8 | WP-802／WP-803／WP-805 禁止該路徑 |
+| 把 I8 當 V2 完成條件 | I6 | I8 完成與否不改行為門檻 |
 
 阻擋協議：WP-204 或 WP-305 紅燈時，不把代理當進度；只修資料或指標。
 
@@ -206,10 +231,11 @@ W6     I7  包裝與示範
 - 每日 checklist、小時估算
 - 選定 LLM 具體版號（WP-102 開工時寫進 `app.yaml` 即可）
 - 再討論 D34–D37（已定案）；D38 規則已定（凍結後鎖），門檻數值見 WP-206
+- 把本機 UI 升成 SSOT 正式產品介面（若要升，先改 SSOT）
 
 ---
 
 ## 7. 現在下一步
 
-開始 **WP-601**（代理評測器 vs 全題金標），再 WP-602 naive-LLM baseline。  
-I6 正式評測前金標須齊（已有 `eval/goldens/q1_q15_goldens.json`；入口：`python scripts/run_agent_eval.py --dry-gate`）。
+開始可選 **WP-801**（本機 Explore UI），或停在此處整理 PR。  
+I7 重現：`python -m api.server`、`python scripts/demo.py`、`docker compose -f deploy/docker-compose.yml up --build`。

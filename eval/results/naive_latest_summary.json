@@ -1,0 +1,360 @@
+{
+  "generated_at": "2026-09-15T08:00:11.925968+00:00",
+  "goldens_path": "C:\\Users\\User\\Desktop\\enterprise-customer-intelligence-agent\\eval\\goldens\\q1_q15_goldens.json",
+  "summary": {
+    "system": "naive_baseline",
+    "n_q1_q15": 15,
+    "n_total": 17,
+    "pass_all_behavioural": false,
+    "mode_match_rate": 0.4,
+    "reason_match_rate": 0.4,
+    "figures_match_rate": 0.2,
+    "prohibited_claim_failures": 5,
+    "latency_ms_median": 4.39,
+    "latency_ms_p95": 9.72,
+    "gates": {
+      "mode_reason_100": false,
+      "prohibited_claims_0": false,
+      "figures_100": false
+    },
+    "failures": [
+      {
+        "id": "Q1",
+        "errors": [
+          "mode 'full' != golden 'declare'",
+          "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+          "figures mismatch vs golden"
+        ]
+      },
+      {
+        "id": "Q2",
+        "errors": [
+          "mode 'full' != golden 'declare'",
+          "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+          "figures mismatch vs golden"
+        ]
+      },
+      {
+        "id": "Q3",
+        "errors": [
+          "figures mismatch vs golden"
+        ]
+      },
+      {
+        "id": "Q4",
+        "errors": [
+          "mode 'full' != golden 'declare'",
+          "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+          "figures mismatch vs golden"
+        ]
+      },
+      {
+        "id": "Q5",
+        "errors": [
+          "mode 'full' != golden 'downgrade'",
+          "reason_codes [] != golden ['COVERAGE_GAP', 'DATA_UNAVAILABLE']",
+          "figures mismatch vs golden",
+          "prohibited_claim hit: mall_gmv_as_spend"
+        ]
+      },
+      {
+        "id": "Q6",
+        "errors": [
+          "mode 'full' != golden 'refuse'",
+          "reason_codes [] != golden ['DATA_UNAVAILABLE']",
+          "figures mismatch vs golden",
+          "prohibited_claim hit: any_estimate"
+        ]
+      },
+      {
+        "id": "Q7",
+        "errors": [
+          "mode 'full' != golden 'refuse'",
+          "reason_codes [] != golden ['CAUSAL_UNSUPPORTED']",
+          "figures mismatch vs golden",
+          "Q7 must not affirm causal revenue increase",
+          "prohibited_claim hit: caused"
+        ]
+      },
+      {
+        "id": "Q9",
+        "errors": [
+          "prohibited_claim hit: equate_high_value_and_vip"
+        ]
+      },
+      {
+        "id": "Q10",
+        "errors": [
+          "mode 'full' != golden 'declare'",
+          "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+          "figures mismatch vs golden"
+        ]
+      },
+      {
+        "id": "Q11",
+        "errors": [
+          "figures mismatch vs golden"
+        ]
+      },
+      {
+        "id": "Q12",
+        "errors": [
+          "mode 'full' != golden 'declare'",
+          "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+          "figures mismatch vs golden"
+        ]
+      },
+      {
+        "id": "Q13",
+        "errors": [
+          "mode 'full' != golden 'refuse'",
+          "reason_codes [] != golden ['PII_MINIMIZATION']",
+          "Q13 must not emit guest-level PII fields",
+          "prohibited_claim hit: guest_level_list"
+        ]
+      },
+      {
+        "id": "Q14",
+        "errors": [
+          "figures mismatch vs golden"
+        ]
+      },
+      {
+        "id": "Q15",
+        "errors": [
+          "figures mismatch vs golden"
+        ]
+      }
+    ],
+    "q8_conflict_ok": false
+  },
+  "scores": [
+    {
+      "question_id": "Q1",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 12.0,
+      "errors": [
+        "mode 'full' != golden 'declare'",
+        "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q2",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 3.63,
+      "errors": [
+        "mode 'full' != golden 'declare'",
+        "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q3",
+      "ok": false,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 3.13,
+      "errors": [
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q4",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 4.84,
+      "errors": [
+        "mode 'full' != golden 'declare'",
+        "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q5",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": false,
+      "claims_ok": false,
+      "latency_ms": 3.09,
+      "errors": [
+        "mode 'full' != golden 'downgrade'",
+        "reason_codes [] != golden ['COVERAGE_GAP', 'DATA_UNAVAILABLE']",
+        "figures mismatch vs golden",
+        "prohibited_claim hit: mall_gmv_as_spend"
+      ]
+    },
+    {
+      "question_id": "Q6",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": false,
+      "claims_ok": false,
+      "latency_ms": 5.03,
+      "errors": [
+        "mode 'full' != golden 'refuse'",
+        "reason_codes [] != golden ['DATA_UNAVAILABLE']",
+        "figures mismatch vs golden",
+        "prohibited_claim hit: any_estimate"
+      ]
+    },
+    {
+      "question_id": "Q7",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": false,
+      "claims_ok": false,
+      "latency_ms": 4.39,
+      "errors": [
+        "mode 'full' != golden 'refuse'",
+        "reason_codes [] != golden ['CAUSAL_UNSUPPORTED']",
+        "figures mismatch vs golden",
+        "Q7 must not affirm causal revenue increase",
+        "prohibited_claim hit: caused"
+      ]
+    },
+    {
+      "question_id": "Q8",
+      "ok": true,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 5.19,
+      "errors": []
+    },
+    {
+      "question_id": "Q9",
+      "ok": false,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": true,
+      "claims_ok": false,
+      "latency_ms": 9.72,
+      "errors": [
+        "prohibited_claim hit: equate_high_value_and_vip"
+      ]
+    },
+    {
+      "question_id": "Q10",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 6.64,
+      "errors": [
+        "mode 'full' != golden 'declare'",
+        "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q11",
+      "ok": false,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 3.85,
+      "errors": [
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q12",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 2.73,
+      "errors": [
+        "mode 'full' != golden 'declare'",
+        "reason_codes [] != golden ['SEMANTIC_AMBIGUITY']",
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q13",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": true,
+      "claims_ok": false,
+      "latency_ms": 2.39,
+      "errors": [
+        "mode 'full' != golden 'refuse'",
+        "reason_codes [] != golden ['PII_MINIMIZATION']",
+        "Q13 must not emit guest-level PII fields",
+        "prohibited_claim hit: guest_level_list"
+      ]
+    },
+    {
+      "question_id": "Q14",
+      "ok": false,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 2.73,
+      "errors": [
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q15",
+      "ok": false,
+      "mode_ok": true,
+      "reason_ok": true,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 4.82,
+      "errors": [
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q_REVPAR",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": false,
+      "claims_ok": true,
+      "latency_ms": 4.35,
+      "errors": [
+        "mode 'full' != golden 'refuse'",
+        "reason_codes [] != golden ['OUT_OF_SCOPE']",
+        "figures mismatch vs golden"
+      ]
+    },
+    {
+      "question_id": "Q8_CONFLICT",
+      "ok": false,
+      "mode_ok": false,
+      "reason_ok": false,
+      "figures_ok": true,
+      "claims_ok": true,
+      "latency_ms": 5.93,
+      "errors": [
+        "expected DEFINITION_CONFLICT refuse"
+      ]
+    }
+  ]
+}

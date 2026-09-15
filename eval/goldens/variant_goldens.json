@@ -1,0 +1,2284 @@
+{
+  "count": 58,
+  "db": "C:\\Users\\User\\Desktop\\enterprise-customer-intelligence-agent\\data\\synthetic\\generated\\ir01.duckdb",
+  "generator": "scripts/build_variant_goldens.py",
+  "questions": {
+    "Q10_prior_quarter": {
+      "answer_text": "2025-Q3 禮券發行面額 650.00；核銷面額 400.00。對照自營零售營收 1320.43。聲明：核銷≠商場 GMV≠IR 零售營收。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.voucher_issued",
+          "metric_id": "voucher_issued_amount",
+          "period": "2025-Q3",
+          "value": 650.0
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.voucher_redeemed",
+          "metric_id": "voucher_redeemed_amount",
+          "period": "2025-Q3",
+          "value": 400.0
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q3",
+          "value": 1320.43
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q10_rw1": {
+      "answer_text": "2025-Q4 禮券發行面額 500.00；核銷面額 800.00。對照自營零售營收 1541.94。聲明：核銷≠商場 GMV≠IR 零售營收。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.voucher_issued",
+          "metric_id": "voucher_issued_amount",
+          "period": "2025-Q4",
+          "value": 500.0
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.voucher_redeemed",
+          "metric_id": "voucher_redeemed_amount",
+          "period": "2025-Q4",
+          "value": 800.0
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 1541.94
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q10_rw2": {
+      "answer_text": "2025-Q4 禮券發行面額 500.00；核銷面額 800.00。對照自營零售營收 1541.94。聲明：核銷≠商場 GMV≠IR 零售營收。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.voucher_issued",
+          "metric_id": "voucher_issued_amount",
+          "period": "2025-Q4",
+          "value": 500.0
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.voucher_redeemed",
+          "metric_id": "voucher_redeemed_amount",
+          "period": "2025-Q4",
+          "value": 800.0
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 1541.94
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q10_rw3": {
+      "answer_text": "2025-Q4 禮券發行面額 500.00；核銷面額 800.00。對照自營零售營收 1541.94。聲明：核銷≠商場 GMV≠IR 零售營收。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.voucher_issued",
+          "metric_id": "voucher_issued_amount",
+          "period": "2025-Q4",
+          "value": 500.0
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.voucher_redeemed",
+          "metric_id": "voucher_redeemed_amount",
+          "period": "2025-Q4",
+          "value": 800.0
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 1541.94
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q11_rw1": {
+      "answer_text": "事實：以期末等級快照歸屬自營 IR 認列營收（不含租戶 GMV）。比較 2025-Q3 → 2025-Q4。絕對變動最大等級為 Tier 2（Δ=-5612.61）。各 Tier Δ 加總=-5652.41（可核對）。解釋：此為貢獻分解，非因果歸因。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_current",
+          "period": "2025-Q4",
+          "value": 6102.5599999999995
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_current",
+          "period": "2025-Q4",
+          "value": 11908.45
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_prior",
+          "period": "2025-Q3",
+          "value": 6017.620000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_prior",
+          "period": "2025-Q3",
+          "value": 17521.059999999998
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_prior",
+          "period": "2025-Q3",
+          "value": 124.74000000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "tier_ir_revenue_delta",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": 84.93999999999869
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "tier_ir_revenue_delta",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": -5612.609999999997
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "tier_ir_revenue_delta",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": -124.74000000000001
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "sum_tier_deltas",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": -5652.409999999998
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "analytical",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q11_rw2": {
+      "answer_text": "事實：以期末等級快照歸屬自營 IR 認列營收（不含租戶 GMV）。比較 2025-Q3 → 2025-Q4。絕對變動最大等級為 Tier 2（Δ=-5612.61）。各 Tier Δ 加總=-5652.41（可核對）。解釋：此為貢獻分解，非因果歸因。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_current",
+          "period": "2025-Q4",
+          "value": 6102.5599999999995
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_current",
+          "period": "2025-Q4",
+          "value": 11908.45
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_prior",
+          "period": "2025-Q3",
+          "value": 6017.620000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_prior",
+          "period": "2025-Q3",
+          "value": 17521.059999999998
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_prior",
+          "period": "2025-Q3",
+          "value": 124.74000000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "tier_ir_revenue_delta",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": 84.93999999999869
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "tier_ir_revenue_delta",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": -5612.609999999997
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "tier_ir_revenue_delta",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": -124.74000000000001
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "sum_tier_deltas",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": -5652.409999999998
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "analytical",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q11_rw3": {
+      "answer_text": "事實：以期末等級快照歸屬自營 IR 認列營收（不含租戶 GMV）。比較 2025-Q3 → 2025-Q4。絕對變動最大等級為 Tier 2（Δ=-5612.61）。各 Tier Δ 加總=-5652.41（可核對）。解釋：此為貢獻分解，非因果歸因。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_current",
+          "period": "2025-Q4",
+          "value": 6102.5599999999995
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_current",
+          "period": "2025-Q4",
+          "value": 11908.45
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_prior",
+          "period": "2025-Q3",
+          "value": 6017.620000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_prior",
+          "period": "2025-Q3",
+          "value": 17521.059999999998
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.ir_revenue_by_tier",
+          "metric_id": "tier_ir_revenue_prior",
+          "period": "2025-Q3",
+          "value": 124.74000000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "tier_ir_revenue_delta",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": 84.93999999999869
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "tier_ir_revenue_delta",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": -5612.609999999997
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "tier_ir_revenue_delta",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": -124.74000000000001
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.tier_contribution_change",
+          "metric_id": "sum_tier_deltas",
+          "period": "2025-Q3_to_2025-Q4",
+          "value": -5652.409999999998
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "analytical",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q12_rw1": {
+      "answer_text": "聲明：可觀察用餐＝自營 F&B ∪ F&B 禮券核銷；不含 IRD、不含租戶餐廳整單。Tier 2：2025-Q4=1974.56；2024-Q4=1499.51；Δ=475.05。較去年同期是否下降：否。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_current",
+          "period": "2025-Q4",
+          "value": 1974.5600000000004
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_self_op_current",
+          "period": "2025-Q4",
+          "value": 1974.5600000000004
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_voucher_redeemed_current",
+          "period": "2025-Q4",
+          "value": 0.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_prior_year",
+          "period": "2024-Q4",
+          "value": 1499.51
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_yoy_delta",
+          "period": "2024-Q4_to_2025-Q4",
+          "value": 475.0500000000004
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "analytical",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q12_rw2": {
+      "answer_text": "聲明：可觀察用餐＝自營 F&B ∪ F&B 禮券核銷；不含 IRD、不含租戶餐廳整單。Tier 2：2025-Q4=1974.56；2024-Q4=1499.51；Δ=475.05。較去年同期是否下降：否。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_current",
+          "period": "2025-Q4",
+          "value": 1974.5600000000004
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_self_op_current",
+          "period": "2025-Q4",
+          "value": 1974.5600000000004
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_voucher_redeemed_current",
+          "period": "2025-Q4",
+          "value": 0.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_prior_year",
+          "period": "2024-Q4",
+          "value": 1499.51
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_yoy_delta",
+          "period": "2024-Q4_to_2025-Q4",
+          "value": 475.0500000000004
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "analytical",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q12_rw3": {
+      "answer_text": "聲明：可觀察用餐＝自營 F&B ∪ F&B 禮券核銷；不含 IRD、不含租戶餐廳整單。Tier 2：2025-Q4=1974.56；2024-Q4=1499.51；Δ=475.05。較去年同期是否下降：否。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_current",
+          "period": "2025-Q4",
+          "value": 1974.5600000000004
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_self_op_current",
+          "period": "2025-Q4",
+          "value": 1974.5600000000004
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_voucher_redeemed_current",
+          "period": "2025-Q4",
+          "value": 0.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_prior_year",
+          "period": "2024-Q4",
+          "value": 1499.51
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_yoy_delta",
+          "period": "2024-Q4_to_2025-Q4",
+          "value": 475.0500000000004
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "analytical",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q12_tier1": {
+      "answer_text": "聲明：可觀察用餐＝自營 F&B ∪ F&B 禮券核銷；不含 IRD、不含租戶餐廳整單。Tier 1：2025-Q4=1213.01；2024-Q4=856.71；Δ=356.30。較去年同期是否下降：否。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_current",
+          "period": "2025-Q4",
+          "value": 1213.01
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_self_op_current",
+          "period": "2025-Q4",
+          "value": 1163.01
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_voucher_redeemed_current",
+          "period": "2025-Q4",
+          "value": 50.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_prior_year",
+          "period": "2024-Q4",
+          "value": 856.7100000000002
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_yoy_delta",
+          "period": "2024-Q4_to_2025-Q4",
+          "value": 356.29999999999984
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "analytical",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q12_tier2": {
+      "answer_text": "聲明：可觀察用餐＝自營 F&B ∪ F&B 禮券核銷；不含 IRD、不含租戶餐廳整單。Tier 2：2025-Q4=1974.56；2024-Q4=1499.51；Δ=475.05。較去年同期是否下降：否。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_current",
+          "period": "2025-Q4",
+          "value": 1974.5600000000004
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_self_op_current",
+          "period": "2025-Q4",
+          "value": 1974.5600000000004
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_voucher_redeemed_current",
+          "period": "2025-Q4",
+          "value": 0.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_prior_year",
+          "period": "2024-Q4",
+          "value": 1499.51
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_yoy_delta",
+          "period": "2024-Q4_to_2025-Q4",
+          "value": 475.0500000000004
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "analytical",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q12_tier3": {
+      "answer_text": "聲明：可觀察用餐＝自營 F&B ∪ F&B 禮券核銷；不含 IRD、不含租戶餐廳整單。Tier 3：2025-Q4=0.00；2024-Q4=113.79；Δ=-113.79。較去年同期是否下降：是。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_current",
+          "period": "2025-Q4",
+          "value": 0.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_self_op_current",
+          "period": "2025-Q4",
+          "value": 0.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "fb_voucher_redeemed_current",
+          "period": "2025-Q4",
+          "value": 0.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_prior_year",
+          "period": "2024-Q4",
+          "value": 113.79
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.observable_dining",
+          "metric_id": "observable_dining_yoy_delta",
+          "period": "2024-Q4_to_2025-Q4",
+          "value": -113.79
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "analytical",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q13_rw1": {
+      "answer_text": "拒絕輸出 VIP 姓名、聯絡方式或逐客消費明細（PII 最小化）。可改問彙總（例如 Tier 3 人數）。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "config/policy.yaml",
+          "type": "policy"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "PII_MINIMIZATION"
+      ],
+      "response_mode": "refuse"
+    },
+    "Q13_rw2": {
+      "answer_text": "拒絕輸出 VIP 姓名、聯絡方式或逐客消費明細（PII 最小化）。可改問彙總（例如 Tier 3 人數）。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "config/policy.yaml",
+          "type": "policy"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "PII_MINIMIZATION"
+      ],
+      "response_mode": "refuse"
+    },
+    "Q14_rw1": {
+      "answer_text": "不算活躍。（過去 90 天僅租戶禮券核銷、無 IR 錢包現金的會員數樣本計數：4；規則 I16。）",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.tenant_only_redeemers",
+          "metric_id": "tenant_only_redeemer_count",
+          "period": "trailing_90d",
+          "value": 4
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q14_rw2": {
+      "answer_text": "不算活躍。（過去 90 天僅租戶禮券核銷、無 IR 錢包現金的會員數樣本計數：4；規則 I16。）",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.tenant_only_redeemers",
+          "metric_id": "tenant_only_redeemer_count",
+          "period": "trailing_90d",
+          "value": 4
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q14_rw3": {
+      "answer_text": "不算活躍。（過去 90 天僅租戶禮券核銷、無 IR 錢包現金的會員數樣本計數：4；規則 I16。）",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.tenant_only_redeemers",
+          "metric_id": "tenant_only_redeemer_count",
+          "period": "trailing_90d",
+          "value": 4
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q15_rw1": {
+      "answer_text": "否：套裝中租戶餐廳早餐與購物禮券走負債／核銷事件，不分別計入 F&B 與零售 IR 營收。自營晚餐掛房帳歸 F&B（payment_path=folio），不是酒店套裝拆分；錢包現金結帳只計一次。（樣本：folio F&B 交易 1 筆、金額 85.00。）",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.package_and_folio_rules",
+          "metric_id": "folio_fb_txn_count",
+          "period": "as_of_snapshot",
+          "value": 1
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.package_and_folio_rules",
+          "metric_id": "folio_fb_amount",
+          "period": "as_of_snapshot",
+          "value": 85.0
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "knowledge",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q15_rw2": {
+      "answer_text": "否：套裝中租戶餐廳早餐與購物禮券走負債／核銷事件，不分別計入 F&B 與零售 IR 營收。自營晚餐掛房帳歸 F&B（payment_path=folio），不是酒店套裝拆分；錢包現金結帳只計一次。（樣本：folio F&B 交易 1 筆、金額 85.00。）",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.package_and_folio_rules",
+          "metric_id": "folio_fb_txn_count",
+          "period": "as_of_snapshot",
+          "value": 1
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.package_and_folio_rules",
+          "metric_id": "folio_fb_amount",
+          "period": "as_of_snapshot",
+          "value": 85.0
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "knowledge",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q1_prior_quarter": {
+      "answer_text": "2025-Q3 三支柱 IR 營收：酒店支柱合計 30069.28 （淨房收 28774.88 + 酒店其他 1294.40）；F&B 自營 4681.90；零售自營 1320.43。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q3",
+          "value": 30069.280000000006
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q3",
+          "value": 28774.880000000005
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q3",
+          "value": 1294.3999999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.fb_self_op_revenue",
+          "metric_id": "fb_self_op_revenue",
+          "period": "2025-Q3",
+          "value": 4681.899999999999
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q3",
+          "value": 1320.43
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q1_rw1": {
+      "answer_text": "2025-Q4 三支柱 IR 營收：酒店支柱合計 20119.99 （淨房收 18849.16 + 酒店其他 1270.83）；F&B 自營 4945.20；零售自營 1541.94。聲明：F&B／零售僅自營，不含租戶 GMV；酒店為支柱合計。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q4",
+          "value": 20119.989999999994
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q4",
+          "value": 18849.159999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q4",
+          "value": 1270.8299999999997
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.fb_self_op_revenue",
+          "metric_id": "fb_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 4945.199999999999
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 1541.94
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q1_rw2": {
+      "answer_text": "2025-Q4 三支柱 IR 營收：酒店支柱合計 20119.99 （淨房收 18849.16 + 酒店其他 1270.83）；F&B 自營 4945.20；零售自營 1541.94。聲明：F&B／零售僅自營，不含租戶 GMV；酒店為支柱合計。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q4",
+          "value": 20119.989999999994
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q4",
+          "value": 18849.159999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q4",
+          "value": 1270.8299999999997
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.fb_self_op_revenue",
+          "metric_id": "fb_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 4945.199999999999
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 1541.94
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q1_rw3": {
+      "answer_text": "2025-Q4 三支柱 IR 營收：酒店支柱合計 20119.99 （淨房收 18849.16 + 酒店其他 1270.83）；F&B 自營 4945.20；零售自營 1541.94。聲明：F&B／零售僅自營，不含租戶 GMV；酒店為支柱合計。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q4",
+          "value": 20119.989999999994
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q4",
+          "value": 18849.159999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q4",
+          "value": 1270.8299999999997
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.fb_self_op_revenue",
+          "metric_id": "fb_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 4945.199999999999
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 1541.94
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q1_rw4": {
+      "answer_text": "2025-Q4 三支柱 IR 營收：酒店支柱合計 20119.99 （淨房收 18849.16 + 酒店其他 1270.83）；F&B 自營 4945.20；零售自營 1541.94。聲明：F&B／零售僅自營，不含租戶 GMV；酒店為支柱合計。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q4",
+          "value": 20119.989999999994
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q4",
+          "value": 18849.159999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q4",
+          "value": 1270.8299999999997
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.fb_self_op_revenue",
+          "metric_id": "fb_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 4945.199999999999
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 1541.94
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q1_rw5": {
+      "answer_text": "2025-Q4 三支柱 IR 營收：酒店支柱合計 20119.99 （淨房收 18849.16 + 酒店其他 1270.83）；F&B 自營 4945.20；零售自營 1541.94。聲明：F&B／零售僅自營，不含租戶 GMV；酒店為支柱合計。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q4",
+          "value": 20119.989999999994
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q4",
+          "value": 18849.159999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q4",
+          "value": 1270.8299999999997
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.fb_self_op_revenue",
+          "metric_id": "fb_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 4945.199999999999
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.retail_self_op_revenue",
+          "metric_id": "retail_self_op_revenue",
+          "period": "2025-Q4",
+          "value": 1541.94
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q2_prior_quarter": {
+      "answer_text": "聲明：預設「酒店營收」＝酒店支柱合計（淨房收＋酒店其他）。2025-Q3 酒店支柱合計 30069.28（淨房收 28774.88＋酒店其他 1294.40）。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q3",
+          "value": 30069.280000000006
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q3",
+          "value": 28774.880000000005
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q3",
+          "value": 1294.3999999999996
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q2_rw1": {
+      "answer_text": "聲明：預設「酒店營收」＝酒店支柱合計（淨房收＋酒店其他），非淨房收 alone。2025-Q4 酒店支柱合計 20119.99（淨房收 18849.16＋酒店其他 1270.83）。間夜／淨房收請另問；不含 F&B／零售；不計算 ADR／RevPAR。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q4",
+          "value": 20119.989999999994
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q4",
+          "value": 18849.159999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q4",
+          "value": 1270.8299999999997
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q2_rw2": {
+      "answer_text": "聲明：預設「酒店營收」＝酒店支柱合計（淨房收＋酒店其他），非淨房收 alone。2025-Q4 酒店支柱合計 20119.99（淨房收 18849.16＋酒店其他 1270.83）。間夜／淨房收請另問；不含 F&B／零售；不計算 ADR／RevPAR。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q4",
+          "value": 20119.989999999994
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q4",
+          "value": 18849.159999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q4",
+          "value": 1270.8299999999997
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q2_rw3": {
+      "answer_text": "聲明：預設「酒店營收」＝酒店支柱合計（淨房收＋酒店其他），非淨房收 alone。2025-Q4 酒店支柱合計 20119.99（淨房收 18849.16＋酒店其他 1270.83）。間夜／淨房收請另問；不含 F&B／零售；不計算 ADR／RevPAR。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q4",
+          "value": 20119.989999999994
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q4",
+          "value": 18849.159999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q4",
+          "value": 1270.8299999999997
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q2_rw4": {
+      "answer_text": "聲明：預設「酒店營收」＝酒店支柱合計（淨房收＋酒店其他），非淨房收 alone。2025-Q4 酒店支柱合計 20119.99（淨房收 18849.16＋酒店其他 1270.83）。間夜／淨房收請另問；不含 F&B／零售；不計算 ADR／RevPAR。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_pillar_total",
+          "metric_id": "hotel_pillar_total",
+          "period": "2025-Q4",
+          "value": 20119.989999999994
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.net_room_revenue",
+          "metric_id": "net_room_revenue",
+          "period": "2025-Q4",
+          "value": 18849.159999999996
+        },
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.hotel_other_revenue",
+          "metric_id": "hotel_other_revenue",
+          "period": "2025-Q4",
+          "value": 1270.8299999999997
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q3_rw1": {
+      "answer_text": "過去 90 天活躍會員 67 人（僅計 IR 錢包現金事件；不含租戶禮券核銷／點數兌換／comp）。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.active_member_count",
+          "metric_id": "active_member_count",
+          "period": "trailing_90d",
+          "value": 67
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q3_rw2": {
+      "answer_text": "過去 90 天活躍會員 67 人（僅計 IR 錢包現金事件；不含租戶禮券核銷／點數兌換／comp）。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.active_member_count",
+          "metric_id": "active_member_count",
+          "period": "trailing_90d",
+          "value": 67
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q3_rw3": {
+      "answer_text": "過去 90 天活躍會員 67 人（僅計 IR 錢包現金事件；不含租戶禮券核銷／點數兌換／comp）。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.active_member_count",
+          "metric_id": "active_member_count",
+          "period": "trailing_90d",
+          "value": 67
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q3_rw4": {
+      "answer_text": "過去 90 天活躍會員 67 人（僅計 IR 錢包現金事件；不含租戶禮券核銷／點數兌換／comp）。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.active_member_count",
+          "metric_id": "active_member_count",
+          "period": "trailing_90d",
+          "value": 67
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q4_rw1": {
+      "answer_text": "客戶數（預設＝會員）為 120。聲明：不含訪客數、住房客數、未識別消費者。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.member_count",
+          "metric_id": "member_count",
+          "period": "as_of",
+          "value": 120
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q4_rw2": {
+      "answer_text": "客戶數（預設＝會員）為 120。聲明：不含訪客數、住房客數、未識別消費者。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.member_count",
+          "metric_id": "member_count",
+          "period": "as_of",
+          "value": 120
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q4_rw3": {
+      "answer_text": "客戶數（預設＝會員）為 120。聲明：不含訪客數、住房客數、未識別消費者。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.member_count",
+          "metric_id": "member_count",
+          "period": "as_of",
+          "value": 120
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q4_rw4": {
+      "answer_text": "客戶數（預設＝會員）為 120。聲明：不含訪客數、住房客數、未識別消費者。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {},
+          "evidence_ref": "metrics.member_count",
+          "metric_id": "member_count",
+          "period": "as_of",
+          "value": 120
+        }
+      ],
+      "missing_for_full": null,
+      "question_type": "deterministic",
+      "reason_codes": [
+        "SEMANTIC_AMBIGUITY"
+      ],
+      "response_mode": "declare"
+    },
+    "Q5_rw1": {
+      "answer_text": "無法回答 Tier 2 完整商場 GMV（租戶實付不可知）。可觀察子集（2025-Q4）：自營零售 POS 793.52；購物禮券核銷面額 450.00；合計 1243.52。聲明：禮券面額≠整單；租戶實付未知。",
+      "coverage_gap": "Full mall / tenant GMV not in IR data rights.",
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "self_op_retail_pos",
+          "period": "2025-Q4",
+          "value": 793.5200000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "shopping_voucher_redeemed_face",
+          "period": "2025-Q4",
+          "value": 450.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "observable_retail_total",
+          "period": "2025-Q4",
+          "value": 1243.52
+        }
+      ],
+      "missing_for_full": "Tenant POS / guest-level GMV at leased outlets.",
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "COVERAGE_GAP",
+        "DATA_UNAVAILABLE"
+      ],
+      "response_mode": "downgrade"
+    },
+    "Q5_rw2": {
+      "answer_text": "無法回答 Tier 2 完整商場 GMV（租戶實付不可知）。可觀察子集（2025-Q4）：自營零售 POS 793.52；購物禮券核銷面額 450.00；合計 1243.52。聲明：禮券面額≠整單；租戶實付未知。",
+      "coverage_gap": "Full mall / tenant GMV not in IR data rights.",
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "self_op_retail_pos",
+          "period": "2025-Q4",
+          "value": 793.5200000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "shopping_voucher_redeemed_face",
+          "period": "2025-Q4",
+          "value": 450.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "observable_retail_total",
+          "period": "2025-Q4",
+          "value": 1243.52
+        }
+      ],
+      "missing_for_full": "Tenant POS / guest-level GMV at leased outlets.",
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "COVERAGE_GAP",
+        "DATA_UNAVAILABLE"
+      ],
+      "response_mode": "downgrade"
+    },
+    "Q5_rw3": {
+      "answer_text": "無法回答 Tier 2 完整商場 GMV（租戶實付不可知）。可觀察子集（2025-Q4）：自營零售 POS 793.52；購物禮券核銷面額 450.00；合計 1243.52。聲明：禮券面額≠整單；租戶實付未知。",
+      "coverage_gap": "Full mall / tenant GMV not in IR data rights.",
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "self_op_retail_pos",
+          "period": "2025-Q4",
+          "value": 793.5200000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "shopping_voucher_redeemed_face",
+          "period": "2025-Q4",
+          "value": 450.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "observable_retail_total",
+          "period": "2025-Q4",
+          "value": 1243.52
+        }
+      ],
+      "missing_for_full": "Tenant POS / guest-level GMV at leased outlets.",
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "COVERAGE_GAP",
+        "DATA_UNAVAILABLE"
+      ],
+      "response_mode": "downgrade"
+    },
+    "Q5_rw4": {
+      "answer_text": "無法回答 Tier 2 完整商場 GMV（租戶實付不可知）。可觀察子集（2025-Q4）：自營零售 POS 793.52；購物禮券核銷面額 450.00；合計 1243.52。聲明：禮券面額≠整單；租戶實付未知。",
+      "coverage_gap": "Full mall / tenant GMV not in IR data rights.",
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "self_op_retail_pos",
+          "period": "2025-Q4",
+          "value": 793.5200000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "shopping_voucher_redeemed_face",
+          "period": "2025-Q4",
+          "value": 450.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "observable_retail_total",
+          "period": "2025-Q4",
+          "value": 1243.52
+        }
+      ],
+      "missing_for_full": "Tenant POS / guest-level GMV at leased outlets.",
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "COVERAGE_GAP",
+        "DATA_UNAVAILABLE"
+      ],
+      "response_mode": "downgrade"
+    },
+    "Q5_tier1": {
+      "answer_text": "無法回答 Tier 1 完整商場 GMV（租戶實付不可知）。可觀察子集（2025-Q4）：自營零售 POS 540.81；購物禮券核銷面額 300.00；合計 840.81。聲明：禮券面額≠整單；租戶實付未知。",
+      "coverage_gap": "Full mall / tenant GMV not in IR data rights.",
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "self_op_retail_pos",
+          "period": "2025-Q4",
+          "value": 540.81
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "shopping_voucher_redeemed_face",
+          "period": "2025-Q4",
+          "value": 300.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 1"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "observable_retail_total",
+          "period": "2025-Q4",
+          "value": 840.81
+        }
+      ],
+      "missing_for_full": "Tenant POS / guest-level GMV at leased outlets.",
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "COVERAGE_GAP",
+        "DATA_UNAVAILABLE"
+      ],
+      "response_mode": "downgrade"
+    },
+    "Q5_tier2": {
+      "answer_text": "無法回答 Tier 2 完整商場 GMV（租戶實付不可知）。可觀察子集（2025-Q4）：自營零售 POS 793.52；購物禮券核銷面額 450.00；合計 1243.52。聲明：禮券面額≠整單；租戶實付未知。",
+      "coverage_gap": "Full mall / tenant GMV not in IR data rights.",
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "self_op_retail_pos",
+          "period": "2025-Q4",
+          "value": 793.5200000000001
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "shopping_voucher_redeemed_face",
+          "period": "2025-Q4",
+          "value": 450.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 2"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "observable_retail_total",
+          "period": "2025-Q4",
+          "value": 1243.52
+        }
+      ],
+      "missing_for_full": "Tenant POS / guest-level GMV at leased outlets.",
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "COVERAGE_GAP",
+        "DATA_UNAVAILABLE"
+      ],
+      "response_mode": "downgrade"
+    },
+    "Q5_tier3": {
+      "answer_text": "無法回答 Tier 3 完整商場 GMV（租戶實付不可知）。可觀察子集（2025-Q4）：自營零售 POS 0.00；購物禮券核銷面額 0.00；合計 0.00。聲明：禮券面額≠整單；租戶實付未知。",
+      "coverage_gap": "Full mall / tenant GMV not in IR data rights.",
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "tools.analytics.metrics",
+          "type": "metrics"
+        }
+      ],
+      "figures": [
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "self_op_retail_pos",
+          "period": "2025-Q4",
+          "value": 0.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "shopping_voucher_redeemed_face",
+          "period": "2025-Q4",
+          "value": 0.0
+        },
+        {
+          "dimensions": {
+            "tier": "Tier 3"
+          },
+          "evidence_ref": "metrics.observable_retail",
+          "metric_id": "observable_retail_total",
+          "period": "2025-Q4",
+          "value": 0.0
+        }
+      ],
+      "missing_for_full": "Tenant POS / guest-level GMV at leased outlets.",
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "COVERAGE_GAP",
+        "DATA_UNAVAILABLE"
+      ],
+      "response_mode": "downgrade"
+    },
+    "Q6_rw1": {
+      "answer_text": "拒絕估計租戶真實消費／GMV。不得插補或外推。可改問 Q5 可觀察子集（自營零售 POS ∪ 購物禮券核銷），但那不是估計。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "config/policy.yaml",
+          "type": "policy"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "DATA_UNAVAILABLE"
+      ],
+      "response_mode": "refuse"
+    },
+    "Q6_rw2": {
+      "answer_text": "拒絕估計租戶真實消費／GMV。不得插補或外推。可改問 Q5 可觀察子集（自營零售 POS ∪ 購物禮券核銷），但那不是估計。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "config/policy.yaml",
+          "type": "policy"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "DATA_UNAVAILABLE"
+      ],
+      "response_mode": "refuse"
+    },
+    "Q7_rw1": {
+      "answer_text": "不支援因果主張。活動接觸後的觀察性描述不足以證明「造成營收增加」。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "config/policy.yaml",
+          "type": "policy"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "CAUSAL_UNSUPPORTED"
+      ],
+      "response_mode": "refuse"
+    },
+    "Q7_rw2": {
+      "answer_text": "不支援因果主張。活動接觸後的觀察性描述不足以證明「造成營收增加」。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "config/policy.yaml",
+          "type": "policy"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "CAUSAL_UNSUPPORTED"
+      ],
+      "response_mode": "refuse"
+    },
+    "Q8_rw1": {
+      "answer_text": "本版 VIP＝Tier 3（最高忠誠等級）；不等於高價值，也不等於飯店名單 VIP。",
+      "coverage_gap": null,
+      "definitions_used": [
+        "semantic.tiers.vip_synonym_of",
+        "semantic.tiers.vip_declare"
+      ],
+      "evidence": [
+        {
+          "ref": "config/semantic.yaml",
+          "type": "semantic"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "knowledge",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q8_rw2": {
+      "answer_text": "本版 VIP＝Tier 3（最高忠誠等級）；不等於高價值，也不等於飯店名單 VIP。",
+      "coverage_gap": null,
+      "definitions_used": [
+        "semantic.tiers.vip_synonym_of",
+        "semantic.tiers.vip_declare"
+      ],
+      "evidence": [
+        {
+          "ref": "config/semantic.yaml",
+          "type": "semantic"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "knowledge",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q8_rw3": {
+      "answer_text": "本版 VIP＝Tier 3（最高忠誠等級）；不等於高價值，也不等於飯店名單 VIP。",
+      "coverage_gap": null,
+      "definitions_used": [
+        "semantic.tiers.vip_synonym_of",
+        "semantic.tiers.vip_declare"
+      ],
+      "evidence": [
+        {
+          "ref": "config/semantic.yaml",
+          "type": "semantic"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "knowledge",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q9_rw1": {
+      "answer_text": "否。高價值會員看過去 12 個月 IR 錢包現金是否超過門檻（目前門檻=900）；VIP＝Tier 3（最高忠誠等級）。兩者不等同。",
+      "coverage_gap": null,
+      "definitions_used": [
+        "semantic.loyalty.high_value_member",
+        "semantic.tiers.vip_synonym_of"
+      ],
+      "evidence": [
+        {
+          "ref": "config/semantic.yaml",
+          "type": "semantic"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "knowledge",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q9_rw2": {
+      "answer_text": "否。高價值會員看過去 12 個月 IR 錢包現金是否超過門檻（目前門檻=900）；VIP＝Tier 3（最高忠誠等級）。兩者不等同。",
+      "coverage_gap": null,
+      "definitions_used": [
+        "semantic.loyalty.high_value_member",
+        "semantic.tiers.vip_synonym_of"
+      ],
+      "evidence": [
+        {
+          "ref": "config/semantic.yaml",
+          "type": "semantic"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "knowledge",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q9_rw3": {
+      "answer_text": "否。高價值會員看過去 12 個月 IR 錢包現金是否超過門檻（目前門檻=900）；VIP＝Tier 3（最高忠誠等級）。兩者不等同。",
+      "coverage_gap": null,
+      "definitions_used": [
+        "semantic.loyalty.high_value_member",
+        "semantic.tiers.vip_synonym_of"
+      ],
+      "evidence": [
+        {
+          "ref": "config/semantic.yaml",
+          "type": "semantic"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "knowledge",
+      "reason_codes": [],
+      "response_mode": "full"
+    },
+    "Q_REVPAR_rw1": {
+      "answer_text": "RevPAR／ADR 非本版範圍（OUT_OF_SCOPE）。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "config/policy.yaml",
+          "type": "policy"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "response_mode": "refuse"
+    },
+    "Q_REVPAR_rw2": {
+      "answer_text": "RevPAR／ADR 非本版範圍（OUT_OF_SCOPE）。",
+      "coverage_gap": null,
+      "definitions_used": [],
+      "evidence": [
+        {
+          "ref": "config/policy.yaml",
+          "type": "policy"
+        }
+      ],
+      "figures": [],
+      "missing_for_full": null,
+      "question_type": "should_refuse",
+      "reason_codes": [
+        "OUT_OF_SCOPE"
+      ],
+      "response_mode": "refuse"
+    }
+  }
+}

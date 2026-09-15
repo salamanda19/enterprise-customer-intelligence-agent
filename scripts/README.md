@@ -20,3 +20,28 @@ python scripts/v1_smoke.py
 ```
 
 `v1_smoke.py` reuses the frozen DB by default. Add `--rebuild` only when you changed the generator (slow).
+
+## Goldens + I6 eval
+
+```bash
+python scripts/build_goldens.py
+python scripts/build_variant_goldens.py
+python scripts/run_agent_eval.py --dry-gate
+python scripts/run_agent_eval.py --with-naive
+```
+
+Agent scoring fails closed without `eval/goldens/q1_q15_goldens.json`. Default naive baseline is offline (no API key).
+
+## Demo (I7)
+
+```bash
+python scripts/demo.py          # in-process Q5 + Q7
+python scripts/demo.py --http   # against python -m api.server
+```
+
+## API
+
+```bash
+pip install -e ".[api]"
+python -m api.server
+```

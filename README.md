@@ -2,65 +2,74 @@
 
 Grounded AI analytics for natural-language questions over a synthetic **non-gaming integrated resort** (hotel + F&B + retail + loyalty).
 
-The LLM orchestrates tools. Numbers and business definitions come from a semantic layer, deterministic SQL/analytics, and approved documents—not from model memory.
+Numbers and definitions come from a semantic layer, deterministic SQL/analytics, and approved documents—not from model memory. The default path is **deterministic-first** (no LLM required).
 
 ## Status
 
-**I1 (semantic / policy) in progress.** Planning is locked:
+**I1–I7 complete** (V1 CLI → V2 eval → V3 packaging). Optional **I8** (Streamlit Explore) is separate and does not block V2/V3.
 
-- [`docs/ssot.md`](docs/ssot.md) — product SSOT
-- [`docs/implementation_plan.md`](docs/implementation_plan.md) — architecture & phases
-- [`docs/work_plan.md`](docs/work_plan.md) — execution tasks
+- [`docs/ssot.md`](docs/ssot.md) — product SSOT  
+- [`docs/implementation_plan.md`](docs/implementation_plan.md) — architecture & phases  
+- [`docs/work_plan.md`](docs/work_plan.md) — execution tasks  
+- [`docs/architecture/overview.md`](docs/architecture/overview.md) — system diagram  
+- [`docs/writeup/technical_writeup.md`](docs/writeup/technical_writeup.md) — technical writeup  
+- [`docs/evaluation/`](docs/evaluation/) — failure analysis & generative targets  
 
-Physical DuckDB schema and the agent loop are **not** started yet (I2+). Do not treat chat as progress before M3 goldens.
-
-## Intended architecture
+## Architecture (short)
 
 ```text
 User question → Pre-flight policy
-                 → Agent / tools (SQL RO, named metrics, RAG)
-                 → Evidence pack
-                 → Validation
+                 → Deterministic router / tools (metrics, SQL RO, RAG)
+                 → Evidence pack → Validation
                  → full | declare | downgrade | refuse + reason codes + figures
 ```
-
-## Repository layout
-
-| Path | Purpose |
-|------|---------|
-| `src/` | Packages: `semantic`, `policy`, `tools`, `agent`, `validation`, `ecia` |
-| `config/` | `app.yaml`, `semantic.yaml`, `policy.yaml` (behaviour); secrets gitignored |
-| `data/` | Synthetic IR world + approved documents (generator in I2) |
-| `eval/questions/` | Q1–Q15 + RevPAR contracts (no amounts yet) |
-| `tests/invariants/` | I1–I21 catalog |
-| `docs/` | SSOT, plans, later architecture / evaluation / writeup |
-| `scripts/` | Rebuild helpers (I2+) |
-| `deploy/` | Docker later (V3) |
-
-## Delivery stages
-
-1. **V1** — Semantic/policy first, then synthetic data, golden runner, CLI agent with real downgrade/refuse  
-2. **V2** — Full Q1–Q15, validators, naive-LLM baseline, failure analysis  
-3. **V3** — API, Docker, CI, cost/latency, writeup, demo  
 
 ## Setup
 
 ```bash
 python -m venv .venv
 # Windows: .venv\Scripts\activate
-pip install -e ".[dev]"
+pip install -e ".[dev,api]"
+python scripts/rebuild_db.py      # once / when schema changes
+python scripts/build_goldens.py
 pytest
 ```
 
-Copy `config/secrets.example.yaml` → `config/secrets.yaml` when you need an API key (optional; V1 CLI does not call the LLM).
+Copy `config/secrets.example.yaml` → `config/secrets.yaml` only if you need a live LLM naive baseline.
+
+## CLI / demo / eval
 
 ```bash
-python scripts/rebuild_db.py      # once / when schema changes (heavier)
-python scripts/build_goldens.py   # refresh numeric goldens
 python -m agent.cli --question-id Q5 --json
-python scripts/v1_smoke.py        # light smoke; no rebuild by default
+python scripts/demo.py                 # Q5 downgrade + Q7 refuse (real outputs)
+python scripts/run_agent_eval.py --with-naive
 ```
 
-## Next implementation slice
+## HTTP API
 
-**I5** per [`docs/work_plan.md`](docs/work_plan.md): remaining metrics (Q2/Q11/Q12/Q15), full goldens, validators.
+```bash
+python -m api.server
+# GET  /health
+# POST /ask  {"question_id":"Q5"}  or  {"question":"..."}
+```
+
+Host/port: `config/app.yaml` → `api`.
+
+## Docker
+
+```bash
+docker compose -f deploy/docker-compose.yml up --build
+```
+
+See [`deploy/README.md`](deploy/README.md).
+
+## Repository layout
+
+| Path | Purpose |
+|------|---------|
+| `src/` | `agent`, `policy`, `tools`, `validation`, `ecia`, `api`, `agent_eval` |
+| `config/` | Behaviour YAML (secrets gitignored) |
+| `data/` | Documents + synthetic generator (DB gitignored) |
+| `eval/` | Contracts, goldens, result summaries |
+| `deploy/` | Dockerfile + compose |
+| `.github/workflows/` | CI (no live LLM) |

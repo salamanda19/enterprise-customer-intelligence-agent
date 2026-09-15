@@ -1,26 +1,33 @@
 # Evaluation
 
-Mandatory for V2. Contracts for SSOT Q1–Q15 (+ RevPAR) live in `questions/contracts.yaml` from I1—**no expected amounts**.
+Mandatory for V2. Contracts for SSOT Q1–Q15 (+ RevPAR) live in `questions/contracts.yaml`—**no expected amounts**.
 
-## Question types (SSOT §15)
+## Layout
 
-- Deterministic
-- Analytical
-- Knowledge
-- Should-refuse (may still downgrade or attach allowed subsets)
+| Path | Role |
+|---|---|
+| `questions/contracts.yaml` | Base Q1–Q15 + RevPAR contracts |
+| `questions/variants.yaml` | Template variants (reword / tier / period) |
+| `goldens/q1_q15_goldens.json` | Full goldens from runner |
+| `goldens/variant_goldens.json` | Variant goldens |
+| `results/*_latest_summary.json` | Committed eval summaries |
+| `results/runs/` | Large dumps (gitignored) |
 
-Plus four **response modes**: full / declare / downgrade / refuse, with reason codes.
+## Behavioural gates (pre-registered)
 
-## Metrics
+- `response_mode` / reason codes vs contract = **100%**
+- Prohibited claims = **0**
+- Numeric figures vs golden = **100%**
 
-Behavioural gates are pre-registered (mode/reason 100%, prohibited claims 0, figures match golden). Generative metrics (groundedness quality, naive-LLM gap, latency/cost) are set after the first full V2 run.
+Generative metrics (groundedness, explanation quality, naive gap, latency/cost) are calibrated after the first full run — see `docs/evaluation/`.
 
-## Baseline naming
+## Commands
 
-- **golden runner** — deterministic metrics vs frozen DB  
-- **naive-LLM baseline** — minimal RAG/LLM path for comparison  
+```text
+python scripts/build_goldens.py
+python scripts/build_variant_goldens.py
+python scripts/run_agent_eval.py --dry-gate
+python scripts/run_agent_eval.py --with-naive
+```
 
-`questions/` — contracts  
-`baseline/` — naive runner (later)  
-`goldens/` — generated later (I3+)  
-`results/` — committed summaries; ignore large run dumps
+`--naive-llm` is optional and requires `config/secrets.yaml`; default naive path is an offline simulator (`naive-offline-v1`) so CI / weak PCs stay free.

@@ -1,0 +1,34 @@
+name: ci
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -e ".[dev,api]"
+
+      - name: Build frozen DB + goldens
+        run: |
+          python scripts/rebuild_db.py
+          python scripts/build_goldens.py
+
+      - name: Invariants + unit tests
+        run: python -m pytest tests/unit tests/invariants -q --tb=short
+
+      - name: Agent eval (no LLM)
+        run: python scripts/run_agent_eval.py
+
+      # LLM naive path is manual / local only — do not burn CI tokens
+      - name: Note on LLM sampling
+        run: echo "Skip --naive-llm in CI (marked manual). Offline naive optional via --with-naive."
